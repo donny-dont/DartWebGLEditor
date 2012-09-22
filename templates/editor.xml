@@ -1,0 +1,24 @@
+<dockpanel>
+   <border dockpanel.dock='top' borderthickness='1' bordercolor='Black'>
+      <button>Add Sphere</button>
+   </border>
+   <stack dockpanel.dock='left'>
+      <border width='800' height='600' borderthickness='1' bordercolor='Black' />
+   </stack>
+   <treeview dockpanel.dock='right' on.treenodeselected='demotreeview_selection' borderthickness='1' bordercolor='Black' >
+      <treenode draggable='true' childvisibility='visible' header='Tree Node L1A' >
+         <treenode draggable='true' header='Tree Node L2A (custom icon)' >
+            <fileicon>
+               <border width='20' height='20' cornerradius='20' background='Orange' />
+            </fileicon>
+         </treenode>
+         <treenode draggable='true' childvisibility='visible' header='Tree Node L2B'>
+            <treenode draggable='true' header='Tree Node L3A' />
+            <treenode draggable='true' header='Tree Node L3B' />
+            <treenode draggable='true' header='Tree Node L3C' />
+         </treenode>
+         <treenode header='Tree Node L2C' />
+      </treenode>
+      <treenode header='Tree Node L1B' />
+   </treeview>
+</dockpanel>
