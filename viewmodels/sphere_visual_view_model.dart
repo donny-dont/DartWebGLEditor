@@ -1,0 +1,5 @@
+
+class SphereVisualViewModel extends GeneratedMeshViewModel
+{
+
+}

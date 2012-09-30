@@ -1,0 +1,28 @@
+<accordion minwidth='300'>
+<accordionitem header='Box Visual'>
+  <stack>
+    <textblock text='Extents' />
+    <stack orientation='horizontal'>
+      <textblock text='X:' />
+      <textbox width='100' />
+      <textblock text='Y:' />
+      <textbox width='100' />
+      <textblock text='Z:' />
+      <textbox width='100' />
+    </stack>
+    <textblock text='Generate vertex attributes' />
+    <stack orientation='horizontal'>
+      <textblock text='Texture Coordinates' />
+      <checkbox on.selectionchanged='selectionchanged' />
+    </stack>
+    <stack orientation='horizontal'>
+      <textblock text='Normal' />
+      <checkbox on.selectionchanged='normal_changed' />
+    </stack>
+    <stack orientation='horizontal'>
+      <textblock text='Tangent' />
+      <checkbox on.selectionchanged='tangent_changed' />
+    </stack>
+  </stack>
+</accordionitem>
+</accordion>

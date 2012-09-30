@@ -1,0 +1,29 @@
+<stack>
+  <textblock>Position</textblock>
+  <stack orientation='horizontal'>
+    <textblock>X:</textblock>
+    <textbox />
+    <textblock>Y:</textblock>
+    <textbox />
+    <textblock>Z:</textblock>
+    <textbox />
+  </stack>
+  <textblock>Rotation</textblock>
+  <stack orientation='horizontal'>
+    <textblock>X:</textblock>
+    <textbox />
+    <textblock>Y:</textblock>
+    <textbox />
+    <textblock>Z:</textblock>
+    <textbox />
+  </stack>
+  <textblock>Scale</textblock>
+  <stack orientation='horizontal'>
+    <textblock>X:</textblock>
+    <textbox />
+    <textblock>Y:</textblock>
+    <textbox />
+    <textblock>Z:</textblock>
+    <textbox />
+  </stack>  
+</stack>

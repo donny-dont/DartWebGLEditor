@@ -1,10 +1,67 @@
 <dockpanel>
+<!--
+<stack dockpanel.dock='top' height='200'>
+   <tabcontrol margin='10,0,0,0' height='200' background='SteelBlue' width='600' height='340'>
+      <tabitem header='File' closeenabled='false'>
+      </tabitem>
+      <tabitem header='Models' closeenabled='false'>
+      </tabitem>
+   </tabcontrol>
+</stack>
    <border dockpanel.dock='top' borderthickness='1' bordercolor='Black'>
-      <button>Add Sphere</button>
+      <tabcontrol>
+         <tabitem header='File'>
+         
+         </tabitem>
+         <tabitem header='Models'>
+             <button>
+               <stack>
+                 <image sourceuri='images/sphere.png' />
+                 <textblock>Sphere</textblock>
+               </stack>
+             </button>
+         </tabitem>
+      </tabcontrol>
    </border>
+
    <stack dockpanel.dock='left'>
       <border width='800' height='600' borderthickness='1' bordercolor='Black' />
    </stack>
+-->
+   <webglcanvas width='800' height='600' surfaceWidth='800' surfaceHeight='600' dockpanel.dock='left' on.frame='frame' on.loaded='loaded' />
+   <accordion dockpanel.dock='right'>
+     <accordionitem header='Transform'>
+<stack>
+  <textblock>Position</textblock>
+  <stack orientation='horizontal'>
+    <textblock>X:</textblock>
+    <textbox />
+    <textblock>Y:</textblock>
+    <textbox />
+    <textblock>Z:</textblock>
+    <textbox />
+  </stack>
+  <textblock>Rotation</textblock>
+  <stack orientation='horizontal'>
+    <textblock>X:</textblock>
+    <textbox />
+    <textblock>Y:</textblock>
+    <textbox />
+    <textblock>Z:</textblock>
+    <textbox />
+  </stack>
+  <textblock>Scale</textblock>
+  <stack orientation='horizontal'>
+    <textblock>X:</textblock>
+    <textbox />
+    <textblock>Y:</textblock>
+    <textbox />
+    <textblock>Z:</textblock>
+    <textbox />
+  </stack>  
+</stack>     
+     </accordionitem>
+   </accordion>
    <treeview dockpanel.dock='right' on.treenodeselected='demotreeview_selection' borderthickness='1' bordercolor='Black' >
       <treenode draggable='true' childvisibility='visible' header='Tree Node L1A' >
          <treenode draggable='true' header='Tree Node L2A (custom icon)' >

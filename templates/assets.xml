@@ -1,0 +1,18 @@
+<dockpanel>
+  <textblock dockpanel.dock='top' text='Testing' />
+  <stack dockpanel.dock='left'>
+    <textblock text='Upload' />
+  </stack>
+  <stack dockpanel.dock='right'>
+    <border width='800' height='600' borderthickness='10' bordercolor='#DDDDDD'>
+      <actions>
+        <setproperty event='dragEnter' property='borderColor' value='#4E91FF' />
+        <setproperty event='dragLeave' property='borderColor' value='#DDDDDD' />
+        <setproperty event='drop' property='borderColor' value='#DDDDDD' />
+      </actions>
+    </border>
+  </stack>
+  <stack dockpanel.dock='bottom'>
+    <textblock text='Save' />
+  </stack>
+</dockpanel>
