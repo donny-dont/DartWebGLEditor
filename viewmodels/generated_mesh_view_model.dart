@@ -1,21 +1,23 @@
 
 class GeneratedMeshViewModel extends ViewModelBase
 {
-  GeneratedMeshViewModel()
+  GeneratedMeshModel _meshModel;
+
+  GeneratedMeshViewModel(GeneratedMeshModel this._meshModel)
   {
-    print('HIII');
-    registerEventHandler('selectionchanged', _textureCoordsHandler);
+    registerEventHandler('texture_coords_changed', _textureCoordsHandler);
     registerEventHandler('normal_changed', _normalChangedHandler);
     registerEventHandler('tangent_changed', _tangentChangedHandler);
   }
 
   void _textureCoordsHandler(CheckBox checkBox, _)
   {
-    print('i r here');
     if (checkBox.isChecked)
       print('Texcoords checked!');
     else
       print('Texcoords unchecked!');
+
+    _meshModel.texCoords = checkBox.isChecked;
   }
 
   void _normalChangedHandler(CheckBox checkBox, _)
@@ -24,6 +26,8 @@ class GeneratedMeshViewModel extends ViewModelBase
       print('Normal checked!');
     else
       print('Normal unchecked!');
+
+    _meshModel.normals = checkBox.isChecked;
   }
 
   void _tangentChangedHandler(CheckBox checkBox, _)
@@ -32,5 +36,7 @@ class GeneratedMeshViewModel extends ViewModelBase
       print('Tangent checked!');
     else
       print('Tangent unchecked!');
+
+    _meshModel.tangents = checkBox.isChecked;
   }
 }

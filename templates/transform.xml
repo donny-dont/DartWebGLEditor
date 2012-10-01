@@ -1,29 +1,18 @@
-<stack>
-  <textblock>Position</textblock>
-  <stack orientation='horizontal'>
-    <textblock>X:</textblock>
-    <textbox />
-    <textblock>Y:</textblock>
-    <textbox />
-    <textblock>Z:</textblock>
-    <textbox />
+<border>
+<!--
+<accordion minwidth='300'>
+<accordionitem header='Box Visual'>
+-->
+  <stack>
+    <textblock text='Position' />
+    <vector3input x='0' y='0' z='0' />
+    <textblock text='Rotation' />
+    <vector3input x='0' y='0' z='0' />
+    <textblock text='Scale' />
+    <vector3input x='0' y='0' z='0' />
   </stack>
-  <textblock>Rotation</textblock>
-  <stack orientation='horizontal'>
-    <textblock>X:</textblock>
-    <textbox />
-    <textblock>Y:</textblock>
-    <textbox />
-    <textblock>Z:</textblock>
-    <textbox />
-  </stack>
-  <textblock>Scale</textblock>
-  <stack orientation='horizontal'>
-    <textblock>X:</textblock>
-    <textbox />
-    <textblock>Y:</textblock>
-    <textbox />
-    <textblock>Z:</textblock>
-    <textbox />
-  </stack>  
-</stack>
+<!--
+</accordionitem>
+</accordion>
+-->
+</border>

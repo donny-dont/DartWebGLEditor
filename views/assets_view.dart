@@ -5,7 +5,7 @@ class AssetsView extends View
     : super.fromTemplate('templates/assets.xml')
   {
     ready.then((_) {
-      rootVisual.dataContext = new ViewModel();
+      //rootVisual.dataContext = new ViewModel();
     });
   }
 }

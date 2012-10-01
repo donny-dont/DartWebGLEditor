@@ -1,11 +1,11 @@
 
 class BoxVisualView extends View
 {
-  BoxVisualView()
+  BoxVisualView(BoxVisualModel model)
     : super.fromTemplate('templates/box_visual.xml')
   {
     ready.then((_) {
-      rootVisual.dataContext = new BoxVisualViewModel();
+      rootVisual.dataContext = new BoxVisualViewModel(model);
     });
   }
 }

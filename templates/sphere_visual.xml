@@ -4,8 +4,8 @@
 <accordionitem header='Box Visual'>
 -->
   <stack>
-    <textblock text='Extents' />
-    <vector3input on.changed='extents_changed' x='0' y='0' z='0' />
+    <textblock text='Radius' />
+    <textbox on.changed='radius_changed' />
     <textblock text='Generate vertex attributes' />
     <stack orientation='horizontal'>
       <textblock text='Texture Coordinates' />
