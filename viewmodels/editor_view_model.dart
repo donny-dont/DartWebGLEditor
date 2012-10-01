@@ -90,7 +90,7 @@ class EditorViewModel extends ViewModelBase
 
   void _frameHandler(_, FrameEventArgs e)
   {
-    _context.clearColor(1.0, 0.0, 1.0, 1.0);
+    _context.clearColor(0.0, 0.0, 0.0, 1.0);
     _context.enable(WebGLRenderingContext.DEPTH_TEST);
     _context.depthFunc(WebGLRenderingContext.LEQUAL);
     _context.clear(WebGLRenderingContext.COLOR_BUFFER_BIT|WebGLRenderingContext.DEPTH_BUFFER_BIT);

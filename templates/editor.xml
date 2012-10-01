@@ -1,17 +1,17 @@
 <dockpanel>
-  <tabcontrol dockpanel.dock='top' height='100' margin='10,0,0,0'>
+  <tabcontrol dockpanel.dock='top' height='135' margin='10,0,0,0'>
     <tabitem header='File' closeenabled='false'>
       <stack orientation='horizontal'>
         <button on.click='new_file_clicked'>
           <stack>
-            <image sourceuri='images/sphere.png' />
-            <textblock text='New' />
+            <image sourceuri='resources/new.png' />
+            <textblock halign='center' text='New' />
           </stack>
         </button>
         <button on.click='save_file_clicked'>
           <stack>
-            <image sourceuri='images/sphere.png' />
-            <textblock text='Save' />
+            <image sourceuri='resources/save.png' />
+            <textblock halign='center' text='Save' />
           </stack>
         </button>
       </stack>    
@@ -20,14 +20,14 @@
        <stack orientation='horizontal'>
         <button>
           <stack>
-            <image sourceuri='images/sphere.png' />
-            <textblock text='Box' />
+            <image sourceuri='resources/new.png' />
+            <textblock halign='center' text='Box' />
           </stack>
         </button>
         <button>
           <stack>
-            <image sourceuri='images/sphere.png' />
-            <textblock text='Sphere' />
+            <image sourceuri='resources/new.png' />
+            <textblock halign='center' text='Sphere' />
           </stack>
         </button>
       </stack>    
@@ -36,8 +36,8 @@
        <stack orientation='horizontal'>
         <button>
           <stack>
-            <image sourceuri='images/sphere.png' />
-            <textblock text='Fullscreen' />
+            <image sourceuri='resources/new.png' />
+            <textblock halign='center' text='Fullscreen' />
           </stack>
         </button>
       </stack>    
