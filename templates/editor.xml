@@ -57,6 +57,8 @@
     </accordionitem>
   </accordion>
   <treeview dockpanel.dock='right' on.treenodeselected='entity_selected' borderthickness='1' width='250' on.loaded='entity_area_loaded'>
+<!--
     <treenode draggable='true' childvisibility='visible' header='Box' />
+-->
   </treeview>
 </dockpanel>

@@ -1,5 +1,5 @@
 
-class GeneratedMeshModel
+abstract class GeneratedMeshModel
 {
   bool _texCoords;
   bool _normals;

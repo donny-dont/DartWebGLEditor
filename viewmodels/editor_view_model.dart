@@ -34,12 +34,18 @@ class EditorViewModel extends ViewModelBase
   void _entityAreaLoadedHandler(TreeView source, _)
   {
     _entityArea = source;
+
+    TreeNode entityNode = new TreeNode();
+    entityNode.header = 'Box';
+
+    _entityArea.content.add(entityNode);
   }
 
   void _entitySelectedHandler(_, __)
   {
     print('Selected');
-    _componentArea.accordionItems.clear();
+    //_componentArea.content.clear();
+    //_componentArea.testing();
   }
 
   //---------------------------------------------------------------------
@@ -49,6 +55,17 @@ class EditorViewModel extends ViewModelBase
   void _componentAreaLoadedHandler(Accordion source, _)
   {
     _componentArea = source;
+
+    BoxVisualView boxComponent = new BoxVisualView(new BoxVisualModel());
+    AccordionItem test = new AccordionItem();
+    test.header = 'Testing';
+    _componentArea.content.add(test);
+
+    boxComponent.ready
+      .then((_) {
+        _componentArea.content.add(boxComponent.rootVisual);
+        _componentArea.onFirstLoad();
+      });
   }
 
   //---------------------------------------------------------------------
@@ -58,6 +75,14 @@ class EditorViewModel extends ViewModelBase
   void _newFileHandler(_, __)
   {
     print('New file');
+
+    BoxVisualView boxVisual = new BoxVisualView(new BoxVisualModel());
+    _componentArea.content.add(boxVisual);
+
+    TreeNode boxEntity = new TreeNode();
+    boxEntity.header = 'Box';
+
+    _entityArea.content.add(boxEntity);
   }
 
   void _saveFileHandler(_, __)

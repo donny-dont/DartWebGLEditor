@@ -2,5 +2,7 @@ name: DartWebGLEditor
 description: WebGL
 version: 0.0.1
 dependencies:
-  Buckshot:
+  buckshot:
     git: https://github.com/donny-dont/Buckshot.git
+  spectre:
+    git: https://github.com/johnmccutchan/spectre.git

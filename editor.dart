@@ -1,4 +1,5 @@
 #import('dart:html');
+#import('dart:json');
 #import('package:dartnet_event_model/events.dart');
 #import('package:dart_utils/web.dart');
 #import('package:buckshot/buckshot.dart');
@@ -9,6 +10,38 @@
 #import('package:buckshot/extensions/controls/tab_control/tab_control.dart');
 #import('package:buckshot/extensions/controls/canvas/canvas_base.dart');
 #import('package:buckshot/extensions/controls/canvas/webgl_canvas.dart');
+#import('package:spectre/spectre.dart');
+#import('package:dartvectormath/vector_math_html.dart');
+
+//---------------------------------------------------------------------
+// Game engine sources
+//---------------------------------------------------------------------
+
+#source('engine/application/game.dart');
+#source('engine/application/game_settings.dart');
+#source('engine/application/game_view.dart');
+#source('engine/application/game_window.dart');
+
+#source('engine/foundation/iclonable.dart');
+#source('engine/foundation/idisposable.dart');
+#source('engine/foundation/player_index.dart');
+#source('engine/foundation/service_locator.dart');
+
+#source('engine/input/button_state.dart');
+#source('engine/input/cursor.dart');
+#source('engine/input/game_pad.dart');
+#source('engine/input/game_pad_state.dart');
+#source('engine/input/keyboard.dart');
+#source('engine/input/keyboard_state.dart');
+#source('engine/input/keys.dart');
+#source('engine/input/key_state.dart');
+#source('engine/input/mouse.dart');
+#source('engine/input/mouse_buttons.dart');
+#source('engine/input/mouse_state.dart');
+
+//---------------------------------------------------------------------
+// UI sources
+//---------------------------------------------------------------------
 
 #source('controls/vector3_input.dart');
 

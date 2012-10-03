@@ -1,8 +1,4 @@
-<border>
-<!--
-<accordion minwidth='300'>
-<accordionitem header='Box Visual'>
--->
+<accordionitem header='Sphere Visual'>
   <stack>
     <textblock text='Radius' />
     <textbox on.changed='radius_changed' />
@@ -20,8 +16,4 @@
       <checkbox on.selectionchanged='tangent_changed' />
     </stack>
   </stack>
-<!--
 </accordionitem>
-</accordion>
--->
-</border>
