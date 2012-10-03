@@ -30,9 +30,15 @@ class Vector3Input extends Control
 
   void _initVector3InputProperties()
   {
-    xProperty = new FrameworkProperty(this, 'x');
-    yProperty = new FrameworkProperty(this, 'y');
-    zProperty = new FrameworkProperty(this, 'z');
+    xProperty = new FrameworkProperty(this, 'x',
+        defaultValue:0,
+        converter: const StringToNumericConverter());
+    yProperty = new FrameworkProperty(this, 'y',
+        defaultValue:0,
+        converter: const StringToNumericConverter());
+    zProperty = new FrameworkProperty(this, 'z',
+        defaultValue:0,
+        converter: const StringToNumericConverter());
 
     xProperty.propertyChanging + _valueChanged;
     yProperty.propertyChanging + _valueChanged;
@@ -40,9 +46,14 @@ class Vector3Input extends Control
   }
 
   void _valueChanged(sender, args){
+
     changed.invokeAsync(this,
       new VectorChangedEventArgs(
-        getValue(xProperty), getValue(yProperty), getValue(zProperty)));
+        getValue(xProperty),
+        getValue(yProperty),
+        getValue(zProperty)
+      )
+    );
   }
 
   String get defaultControlTemplate {

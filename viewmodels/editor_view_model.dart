@@ -55,16 +55,12 @@ class EditorViewModel extends ViewModelBase
   void _componentAreaLoadedHandler(Accordion source, _)
   {
     _componentArea = source;
-
     BoxVisualView boxComponent = new BoxVisualView(new BoxVisualModel());
-    AccordionItem test = new AccordionItem();
-    test.header = 'Testing';
-    _componentArea.content.add(test);
 
     boxComponent.ready
-      .then((_) {
-        _componentArea.content.add(boxComponent.rootVisual);
-        _componentArea.onFirstLoad();
+      .then((rootVisual) {
+        print('adding');
+        _componentArea.content.add(rootVisual);
       });
   }
 
@@ -77,7 +73,10 @@ class EditorViewModel extends ViewModelBase
     print('New file');
 
     BoxVisualView boxVisual = new BoxVisualView(new BoxVisualModel());
-    _componentArea.content.add(boxVisual);
+
+    boxVisual.ready.then((rootVisual){
+      _componentArea.content.add(rootVisual);
+    });
 
     TreeNode boxEntity = new TreeNode();
     boxEntity.header = 'Box';
@@ -111,6 +110,16 @@ class EditorViewModel extends ViewModelBase
   void _canvasLoadedHandler(WebGLCanvas canvas, _)
   {
     _context = canvas.context;
+
+    // Updated the surface dimension to whatever the canvas size is in the DOM
+    canvas
+      .updateMeasurementAsync
+      .then((ElementRect r){
+        canvas.surfaceHeight = r.bounding.height;
+        canvas.surfaceWidth = r.bounding.width;
+      });
+
+
   }
 
   void _frameHandler(_, FrameEventArgs e)

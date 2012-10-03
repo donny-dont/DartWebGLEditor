@@ -7,8 +7,8 @@ class EditorView extends View
     // When the view is ready, bind the viewmodel to the root object's
     // dataContext.  This crucial step is what allows the view model to
     // bind with the template.
-    ready.then((_){
-      rootVisual.dataContext = new EditorViewModel();
+    ready.then((t){
+      t.dataContext = new EditorViewModel();
     });
   }
 }

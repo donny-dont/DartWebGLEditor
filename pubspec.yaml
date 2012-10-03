@@ -3,6 +3,8 @@ description: WebGL
 version: 0.0.1
 dependencies:
   buckshot:
-    git: https://github.com/donny-dont/Buckshot.git
+    git:
+      url: git://github.com/prujohn/Buckshot.git
+      ref: latest
   spectre:
     git: https://github.com/johnmccutchan/spectre.git

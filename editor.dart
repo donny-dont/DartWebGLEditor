@@ -65,11 +65,8 @@ void main()
 {
   if (!reflectionEnabled){
     buckshot.registerElement(new Accordion.register());
-    buckshot.registerElement(new AccordionItem.register());
     buckshot.registerElement(new TabControl.register());
-    buckshot.registerElement(new TabItem.register());
     buckshot.registerElement(new TreeView.register());
-    buckshot.registerElement(new TreeNode.register());
     buckshot.registerElement(new DockPanel.register());
     buckshot.registerElement(new WebGLCanvas.register());
     buckshot.registerElement(new Vector3Input.register());
@@ -81,8 +78,6 @@ void main()
 
   setView(view)
   .then((viewObject){
-    bind(buckshot.windowWidthProperty,
-        (viewObject.parent as Border).widthProperty);
     bind(buckshot.windowHeightProperty,
         (viewObject.parent as Border).heightProperty);
   });
