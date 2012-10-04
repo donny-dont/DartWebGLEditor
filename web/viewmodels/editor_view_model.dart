@@ -157,7 +157,11 @@ class EditorViewModel extends ViewModelBase
 
     evm
       .propertyVM
-      .propertyViews
+      .setDataContext()
+      .then((_){
+        evm
+        .propertyVM
+        .propertyViews
         .forEach((String name, View view){
           view.ready.then((t){
             final ai = new AccordionItem()
@@ -167,8 +171,8 @@ class EditorViewModel extends ViewModelBase
             _componentArea.accordionItems.add(ai);
           });
         });
-
-  }
+      });
+    }
 
 
   //---------------------------------------------------------------------

@@ -75,11 +75,11 @@ class Vector3Input extends Control
     <stack>
       <stack orientation='horizontal'>
          <textblock text='X:' />
-         <textbox width='50' text='{template x}' />
+         <textbox width='50' text='{template x, mode=TwoWay}' />
          <textblock text='Y:' />
-         <textbox width='50' text='{template y}' />
+         <textbox width='50' text='{template y, mode=TwoWay}' />
          <textblock text='Z:' />
-         <textbox width='50' text='{template z}' />
+         <textbox width='50' text='{template z, mode=TwoWay}' />
       </stack>
     </stack>
   </template>

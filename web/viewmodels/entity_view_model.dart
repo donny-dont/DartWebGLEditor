@@ -33,7 +33,6 @@ class EntityViewModel extends ViewModelBase
     // etc... all of them will be working on the same object since they are
     // scaffolded together.
     propertyVM.model = model;
-    propertyVM.setDataContext();
 
     _initializeEnityViewModelProperties();
   }
