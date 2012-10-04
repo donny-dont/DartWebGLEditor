@@ -1,4 +1,7 @@
 
+// (JOHN)
+// I didn't bring this over into the new property system, since I wasn't
+// sure where you wanted it (EntityPropertiesViewModel? or it's own?)
 class GeneratedMeshViewModel extends ViewModelBase
 {
   GeneratedMeshModel _meshModel;

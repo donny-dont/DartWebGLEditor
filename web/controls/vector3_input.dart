@@ -31,29 +31,40 @@ class Vector3Input extends Control
   void _initVector3InputProperties()
   {
     xProperty = new FrameworkProperty(this, 'x',
-        defaultValue:0,
-        converter: const StringToNumericConverter());
+        defaultValue:'0');
     yProperty = new FrameworkProperty(this, 'y',
-        defaultValue:0,
-        converter: const StringToNumericConverter());
+        defaultValue:'0');
     zProperty = new FrameworkProperty(this, 'z',
-        defaultValue:0,
-        converter: const StringToNumericConverter());
+        defaultValue:'0');
 
     xProperty.propertyChanging + _valueChanged;
     yProperty.propertyChanging + _valueChanged;
     zProperty.propertyChanging + _valueChanged;
   }
 
-  void _valueChanged(sender, args){
+  num get x => _validNum(getValue(xProperty));
+  set x(num value) => setValue(xProperty, '$value');
 
-    changed.invokeAsync(this,
-      new VectorChangedEventArgs(
-        getValue(xProperty),
-        getValue(yProperty),
-        getValue(zProperty)
-      )
-    );
+  num get y => _validNum(getValue(yProperty));
+  set y(num value) => setValue(yProperty, '$value');
+
+  num get z => _validNum(getValue(zProperty));
+  set z(num value) => setValue(zProperty, '$value');
+
+  num _validNum(String value){
+    if (value == null) return 0;
+    if (value.isEmpty()) return 0;
+
+    try{
+      return parseDouble(value);
+    }
+    on FormatException catch(e){
+      return 0;
+    }
+  }
+
+  void _valueChanged(sender, args){
+    changed.invokeAsync(this, new VectorChangedEventArgs(x,y,z));
   }
 
   String get defaultControlTemplate {
@@ -64,11 +75,11 @@ class Vector3Input extends Control
     <stack>
       <stack orientation='horizontal'>
          <textblock text='X:' />
-         <textbox width='50' text='{template x}' />
+         <textbox width='50' text='{template x, mode=TwoWay}' />
          <textblock text='Y:' />
-         <textbox width='50' text='{template y}' />
+         <textbox width='50' text='{template y, mode=TwoWay}' />
          <textblock text='Z:' />
-         <textbox width='50' text='{template z}' />
+         <textbox width='50' text='{template z, mode=TwoWay}' />
       </stack>
     </stack>
   </template>
