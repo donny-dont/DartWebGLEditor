@@ -1,4 +1,4 @@
-<dockpanel>
+<dockpanel halign='stretch' valign='stretch' margin='2'>
   <tabcontrol dockpanel.dock='top' height='135' margin='10,0,0,0'>
     <tabitem header='File' closeenabled='false'>
       <stack orientation='horizontal'>
@@ -43,7 +43,6 @@
       </stack>    
     </tabitem>
   </tabcontrol>
-  <webglcanvas width='800' height='600' surfaceWidth='800' surfaceHeight='600' dockpanel.dock='left' on.frame='frame' on.loaded='canvas_loaded' />
   <accordion dockpanel.dock='right' width='250' on.loaded='component_area_loaded'>
     <accordionitem header='Transform'>
       <stack>
@@ -60,5 +59,7 @@
 <!--
     <treenode draggable='true' childvisibility='visible' header='Box' />
 -->
+
   </treeview>
+  <webglcanvas dockpanel.dock='left' on.frame='frame' on.loaded='canvas_loaded' />
 </dockpanel>
