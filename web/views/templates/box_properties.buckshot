@@ -1,0 +1,4 @@
+<stack>
+	<textblock text='Extents' />
+	<vector3input on.changed='extents_changed' x='0' y='0' z='0' />
+</stack>
