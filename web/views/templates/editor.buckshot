@@ -31,6 +31,12 @@
             <textblock halign='center' text='Sphere' />
           </stack>
         </button>
+    	<button on.click='add_plane_clicked'>
+          <stack>
+            <image sourceuri='web/resources/new.png' />
+            <textblock halign='center' text='Plane' />
+          </stack>
+        </button>
         <button>
           <stack>
             <image sourceuri='web/resources/new.png' />

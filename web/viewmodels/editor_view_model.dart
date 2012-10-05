@@ -27,6 +27,7 @@ class EditorViewModel extends ViewModelBase
     // Model events
     registerEventHandler('add_box_clicked', _addBoxHandler);
     registerEventHandler('add_sphere_clicked', _addSphereHandler);
+    registerEventHandler('add_plane_clicked', _addPlaneHandler);
 
     // Canvas events
     registerEventHandler('canvas_loaded', _canvasLoadedHandler);
@@ -110,35 +111,52 @@ class EditorViewModel extends ViewModelBase
 
   void _addBoxHandler(_, __)
   {
-    final boxVM =
-        new EntityViewModel(new BoxVisualModel(), new BoxPropertiesViewModel())
-          ..entityName ='Box';
-
-    // something should always be selected (_scene is default)
-    assert(_currentNode != null);
-
-    // Using the tag property to hold a reference to the entity view model
-    // object.
-    final node = new TreeNode()
-      ..header = boxVM.entityName
-      ..tag = boxVM;
-
-    if (_currentNode != _scene){
-      // setup the relationships
-      boxVM.parent = _currentNode.tag;
-      _currentNode.tag.children.add(boxVM);
-    }
-
-    _currentNode.childNodes.add(node);
-    _currentNode.childVisibility = Visibility.visible;
-    _currentNode = node;
-
-    _updateUITo(_currentNode);
+    addEntity(new BoxEntityViewModel());
   }
 
   void _addSphereHandler(_, __)
   {
-    print('Adding sphere');
+    addEntity(new SphereEntityViewModel());
+  }
+
+  void _addPlaneHandler(_, __){
+    addEntity(new PlaneEntityViewModel());
+  }
+
+  /** Adds an [entityVM] to the application and updates the UI. */
+  void addEntity(EntityViewModel entityVM){
+    // something should always be selected (_scene is default)
+    assert(_currentNode != null);
+
+
+    Futures
+      .wait([entityVM.fileTemplate, entityVM.folderTemplate])
+      .chain((result){
+        return Futures.wait(result.map((r) => Template.deserialize(r)));
+      })
+      .then((results){
+        // Using the tag property to hold a reference to the entity view model
+        // object.
+        final node = new TreeNode()
+          ..header = entityVM.entityName
+          ..tag = entityVM
+          ..fileIcon = results[0]
+          ..folderIcon = results[1];
+
+        if (_currentNode != _scene){
+          // setup the relationships
+          entityVM.parent = _currentNode.tag;
+          _currentNode.tag.children.add(entityVM);
+        }
+
+        _currentNode.childNodes.add(node);
+        _currentNode.childVisibility = Visibility.visible;
+        _currentNode = node;
+
+        _updateUITo(_currentNode);
+      });
+
+
   }
 
   //---------------------------------------------------------------------
@@ -159,18 +177,20 @@ class EditorViewModel extends ViewModelBase
       .propertyVM
       .setDataContext()
       .then((_){
-        evm
-        .propertyVM
-        .propertyViews
-        .forEach((String name, View view){
-          view.ready.then((t){
-            final ai = new AccordionItem()
-            ..header = name
-            ..body = view.rootVisual;
+        Futures
+          .wait(evm.propertyVM.propertyViews.getValues().map((v) => v.ready))
+          .then((_){
+            evm
+            .propertyVM
+            .propertyViews
+            .forEach((String name, View view){
+              final ai = new AccordionItem()
+                                ..header = name
+                                ..body = view.rootVisual;
 
-            _componentArea.accordionItems.add(ai);
+              _componentArea.accordionItems.add(ai);
+            });
           });
-        });
       });
     }
 

@@ -1,4 +1,0 @@
-<stack>
-	<textblock text='Radius' />
-	<textbox on.changed='radius_changed' />
-</stack>
