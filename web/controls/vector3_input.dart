@@ -52,25 +52,33 @@ class Vector3Input extends Control
     bind(tbZ.textProperty, zProperty, bindingMode:BindingMode.TwoWay);
   }
 
-  num get x => _validNum(getValue(xProperty));
+  num get x => validNum(getValue(xProperty));
   set x(num value) => setValue(xProperty, '$value');
 
-  num get y => _validNum(getValue(yProperty));
+  num get y => validNum(getValue(yProperty));
   set y(num value) => setValue(yProperty, '$value');
 
-  num get z => _validNum(getValue(zProperty));
+  num get z => validNum(getValue(zProperty));
   set z(num value) => setValue(zProperty, '$value');
 
-  num _validNum(String value){
+  /**
+   * From a String [value], returns a valid num.  If the string is not
+   * valid, then the return is 0.
+   */
+  static num validNum(String value){
     if (value == null) return 0;
     if (value.isEmpty()) return 0;
 
+    num numValue;
+
     try{
-      return parseDouble(value);
+      numValue = parseDouble(value);
     }
     on FormatException catch(e){
-      return 0;
+      numValue = 0;
     }
+
+    return numValue;
   }
 
   void _onValueChanged() =>

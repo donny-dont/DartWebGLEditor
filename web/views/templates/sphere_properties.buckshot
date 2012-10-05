@@ -1,4 +1,4 @@
 <stack>
 	<textblock text='Radius' />
-	<textbox on.changed='radius_changed' />
+	<textbox text='{data radius, mode=TwoWay}' />
 </stack>

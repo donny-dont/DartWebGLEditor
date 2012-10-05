@@ -27,6 +27,7 @@ class EditorViewModel extends ViewModelBase
     // Model events
     registerEventHandler('add_box_clicked', _addBoxHandler);
     registerEventHandler('add_sphere_clicked', _addSphereHandler);
+    registerEventHandler('add_plane_clicked', _addPlaneHandler);
 
     // Canvas events
     registerEventHandler('canvas_loaded', _canvasLoadedHandler);
@@ -114,19 +115,43 @@ class EditorViewModel extends ViewModelBase
         new EntityViewModel(new BoxVisualModel(), new BoxPropertiesViewModel())
           ..entityName ='Box';
 
+    addEntity(boxVM);
+  }
+
+  void _addSphereHandler(_, __)
+  {
+    final sphereVM =
+        new EntityViewModel(new SphereVisualModel(),
+            new SpherePropertiesViewModel())
+          ..entityName = 'Sphere';
+
+    addEntity(sphereVM);
+  }
+
+  void _addPlaneHandler(_, __){
+    final planeVM =
+        new EntityViewModel(new PlaneVisualModel(),
+            new PlanePropertiesViewModel())
+          ..entityName = 'Plane';
+
+    addEntity(planeVM);
+  }
+
+  /** Adds an [entityVM] to the application and updates the UI. */
+  void addEntity(EntityViewModel entityVM){
     // something should always be selected (_scene is default)
     assert(_currentNode != null);
 
     // Using the tag property to hold a reference to the entity view model
     // object.
     final node = new TreeNode()
-      ..header = boxVM.entityName
-      ..tag = boxVM;
+      ..header = entityVM.entityName
+      ..tag = entityVM;
 
     if (_currentNode != _scene){
       // setup the relationships
-      boxVM.parent = _currentNode.tag;
-      _currentNode.tag.children.add(boxVM);
+      entityVM.parent = _currentNode.tag;
+      _currentNode.tag.children.add(entityVM);
     }
 
     _currentNode.childNodes.add(node);
@@ -134,11 +159,6 @@ class EditorViewModel extends ViewModelBase
     _currentNode = node;
 
     _updateUITo(_currentNode);
-  }
-
-  void _addSphereHandler(_, __)
-  {
-    print('Adding sphere');
   }
 
   //---------------------------------------------------------------------
