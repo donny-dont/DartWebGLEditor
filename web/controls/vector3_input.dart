@@ -31,41 +31,58 @@ class Vector3Input extends Control
   void _initVector3InputProperties()
   {
     xProperty = new FrameworkProperty(this, 'x',
+        propertyChangedCallback: (v) => _onValueChanged(),
         defaultValue:'0');
     yProperty = new FrameworkProperty(this, 'y',
+        propertyChangedCallback: (v) => _onValueChanged(),
         defaultValue:'0');
     zProperty = new FrameworkProperty(this, 'z',
+        propertyChangedCallback: (v) => _onValueChanged(),
         defaultValue:'0');
-
-    xProperty.propertyChanging + _valueChanged;
-    yProperty.propertyChanging + _valueChanged;
-    zProperty.propertyChanging + _valueChanged;
   }
 
-  num get x => _validNum(getValue(xProperty));
+  void onFirstLoad(){
+    // Get references to our textboxes and then set the bindings.
+    final tbX = Template.findByName('__vector3x__', template) as TextBox;
+    final tbY = Template.findByName('__vector3y__', template) as TextBox;
+    final tbZ = Template.findByName('__vector3z__', template) as TextBox;
+
+    bind(tbX.textProperty, xProperty, bindingMode:BindingMode.TwoWay);
+    bind(tbY.textProperty, yProperty, bindingMode:BindingMode.TwoWay);
+    bind(tbZ.textProperty, zProperty, bindingMode:BindingMode.TwoWay);
+  }
+
+  num get x => validNum(getValue(xProperty));
   set x(num value) => setValue(xProperty, '$value');
 
-  num get y => _validNum(getValue(yProperty));
+  num get y => validNum(getValue(yProperty));
   set y(num value) => setValue(yProperty, '$value');
 
-  num get z => _validNum(getValue(zProperty));
+  num get z => validNum(getValue(zProperty));
   set z(num value) => setValue(zProperty, '$value');
 
-  num _validNum(String value){
+  /**
+   * From a String [value], returns a valid num.  If the string is not
+   * valid, then the return is 0.
+   */
+  static num validNum(String value){
     if (value == null) return 0;
     if (value.isEmpty()) return 0;
 
+    num numValue;
+
     try{
-      return parseDouble(value);
+      numValue = parseDouble(value);
     }
     on FormatException catch(e){
-      return 0;
+      numValue = 0;
     }
+
+    return numValue;
   }
 
-  void _valueChanged(sender, args){
-    changed.invokeAsync(this, new VectorChangedEventArgs(x,y,z));
-  }
+  void _onValueChanged() =>
+      changed.invokeAsync(this, new VectorChangedEventArgs(x,y,z));
 
   String get defaultControlTemplate {
     return
@@ -75,11 +92,11 @@ class Vector3Input extends Control
     <stack>
       <stack orientation='horizontal'>
          <textblock text='X:' />
-         <textbox width='50' text='{template x, mode=TwoWay}' />
+         <textbox name='__vector3x__' width='50' />
          <textblock text='Y:' />
-         <textbox width='50' text='{template y, mode=TwoWay}' />
+         <textbox name='__vector3y__' width='50' />
          <textblock text='Z:' />
-         <textbox width='50' text='{template z, mode=TwoWay}' />
+         <textbox name='__vector3z__' width='50' />
       </stack>
     </stack>
   </template>

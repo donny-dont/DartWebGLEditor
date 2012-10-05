@@ -10,17 +10,14 @@ class TransformPropertiesViewModel extends EntityPropertiesViewModel
   }
 
   void scale_changed(_, VectorChangedEventArgs args){
-
-  print('>> changed!');
+    print('Scale transform changed!');
   }
 
   void position_changed(_, VectorChangedEventArgs args){
-
-    print('>> changed!');
+    print('Position transform changed!');
   }
 
   void rotation_changed(_, VectorChangedEventArgs args){
-
-    print('>> changed!');
+    print('Rotation transform changed!');
   }
 }

@@ -1,16 +1,26 @@
 
 /**
- * Represents content, properties, and operations for an entity.
+ * Base class that represents content, properties, and operations for an entity.
  */
-class EntityViewModel extends ViewModelBase
+abstract class EntityViewModel extends ViewModelBase
 {
+  /** The model to be used by this entity */
   final GeneratedMeshModel model;
+
+  /** The property view model to be used by this entity */
   final EntityPropertiesViewModel propertyVM;
 
+  /** FrameworkProperty that represents the entity friendly name */
   FrameworkProperty entityNameProperty;
 
   /** Reference to the parent of this EntityViewModel.  Null if no parent. */
   EntityViewModel parent;
+
+  /** The icon template to be used when the entity has no children. */
+  abstract Future<String> get fileTemplate;
+
+  /** The icon template to be used when the entity has children. */
+  abstract Future<String> get folderTemplate;
 
   /**
    * Reference to the child EntityViewModel's of this EntityViewModel.
