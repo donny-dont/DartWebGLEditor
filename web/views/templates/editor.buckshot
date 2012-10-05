@@ -4,46 +4,58 @@
       <stack orientation='horizontal'>
         <button on.click='new_file_clicked'>
           <stack>
-            <image sourceuri='resources/new.png' />
+            <image sourceuri='web/resources/new.png' />
             <textblock halign='center' text='New' />
           </stack>
         </button>
         <button on.click='save_file_clicked'>
           <stack>
-            <image sourceuri='resources/save.png' />
+            <image sourceuri='web/resources/save.png' />
             <textblock halign='center' text='Save' />
           </stack>
+        </button>
+        <!-- 
+        (JOHN)
+        Keeping these buttons in in the first tab until event wire-up bug
+        fixed.
+        -->
+        <button on.click='add_box_clicked'>
+          <stack>
+            <image sourceuri='web/resources/new.png' />
+            <textblock halign='center' text='Box' />
+          </stack>
+        </button>
+        <button on.click='add_sphere_clicked'>
+          <stack>
+            <image sourceuri='web/resources/new.png' />
+            <textblock halign='center' text='Sphere' />
+          </stack>
+        </button>
+        <button>
+          <stack>
+            <image sourceuri='web/resources/new.png' />
+            <textblock halign='center' text='Fullscreen' />
+          </stack>
+        </button>
+        <button on.click='zoidberg'>
+            <image width='105' sourceuri='web/resources/for_don.jpg' />
         </button>
       </stack>    
     </tabitem>
     <tabitem header='Models' closeenabled='false'>
        <stack orientation='horizontal'>
-        <button>
-          <stack>
-            <image sourceuri='resources/new.png' />
-            <textblock halign='center' text='Box' />
-          </stack>
-        </button>
-        <button>
-          <stack>
-            <image sourceuri='resources/new.png' />
-            <textblock halign='center' text='Sphere' />
-          </stack>
-        </button>
+
       </stack>    
     </tabitem>
     <tabitem header='View' closeenabled='false'>
        <stack orientation='horizontal'>
-        <button>
-          <stack>
-            <image sourceuri='resources/new.png' />
-            <textblock halign='center' text='Fullscreen' />
-          </stack>
-        </button>
+
       </stack>    
     </tabitem>
   </tabcontrol>
   <accordion dockpanel.dock='right' width='250' on.loaded='component_area_loaded'>
+  	<!--
+  	(JOHN)
     <accordionitem header='Transform'>
       <stack>
         <textblock>Position</textblock>
@@ -54,6 +66,7 @@
         <vector3input x='0' y='0' z='0' />
       </stack>
     </accordionitem>
+	-->
   </accordion>
   <treeview dockpanel.dock='right' on.treenodeselected='entity_selected' borderthickness='1' width='250' on.loaded='entity_area_loaded'>
 <!--

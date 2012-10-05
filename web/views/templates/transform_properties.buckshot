@@ -1,0 +1,8 @@
+<stack>
+	<textblock text='Position' />
+	<vector3input on.changed='position_changed' x='0' y='0' z='0' />
+	<textblock text='Rotation' />
+	<vector3input on.changed='rotation_changed' x='0' y='0' z='0' />
+	<textblock text='Scale' />
+	<vector3input on.changed='scale_changed' x='0' y='0' z='0' />
+</stack>
