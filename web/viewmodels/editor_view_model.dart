@@ -111,30 +111,16 @@ class EditorViewModel extends ViewModelBase
 
   void _addBoxHandler(_, __)
   {
-    final boxVM =
-        new EntityViewModel(new BoxVisualModel(), new BoxPropertiesViewModel())
-          ..entityName ='Box';
-
-    addEntity(boxVM);
+    addEntity(new BoxEntityViewModel());
   }
 
   void _addSphereHandler(_, __)
   {
-    final sphereVM =
-        new EntityViewModel(new SphereVisualModel(),
-            new SpherePropertiesViewModel())
-          ..entityName = 'Sphere';
-
-    addEntity(sphereVM);
+    addEntity(new SphereEntityViewModel());
   }
 
   void _addPlaneHandler(_, __){
-    final planeVM =
-        new EntityViewModel(new PlaneVisualModel(),
-            new PlanePropertiesViewModel())
-          ..entityName = 'Plane';
-
-    addEntity(planeVM);
+    addEntity(new PlaneEntityViewModel());
   }
 
   /** Adds an [entityVM] to the application and updates the UI. */
@@ -142,23 +128,35 @@ class EditorViewModel extends ViewModelBase
     // something should always be selected (_scene is default)
     assert(_currentNode != null);
 
-    // Using the tag property to hold a reference to the entity view model
-    // object.
-    final node = new TreeNode()
-      ..header = entityVM.entityName
-      ..tag = entityVM;
 
-    if (_currentNode != _scene){
-      // setup the relationships
-      entityVM.parent = _currentNode.tag;
-      _currentNode.tag.children.add(entityVM);
-    }
+    Futures
+      .wait([entityVM.fileTemplate, entityVM.folderTemplate])
+      .chain((result){
+        return Futures.wait(result.map((r) => Template.deserialize(r)));
+      })
+      .then((results){
+        // Using the tag property to hold a reference to the entity view model
+        // object.
+        final node = new TreeNode()
+          ..header = entityVM.entityName
+          ..tag = entityVM
+          ..fileIcon = results[0]
+          ..folderIcon = results[1];
 
-    _currentNode.childNodes.add(node);
-    _currentNode.childVisibility = Visibility.visible;
-    _currentNode = node;
+        if (_currentNode != _scene){
+          // setup the relationships
+          entityVM.parent = _currentNode.tag;
+          _currentNode.tag.children.add(entityVM);
+        }
 
-    _updateUITo(_currentNode);
+        _currentNode.childNodes.add(node);
+        _currentNode.childVisibility = Visibility.visible;
+        _currentNode = node;
+
+        _updateUITo(_currentNode);
+      });
+
+
   }
 
   //---------------------------------------------------------------------

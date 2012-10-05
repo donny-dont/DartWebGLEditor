@@ -70,6 +70,9 @@
 #source('viewmodels/properties/entity_properties_view_model.dart');
 #source('viewmodels/properties/properties_view_model_base.dart');
 #source('viewmodels/properties/empty_properties_view_model.dart');
+#source('viewmodels/box_entity_view_model.dart');
+#source('viewmodels/sphere_entity_view_model.dart');
+#source('viewmodels/plane_entity_view_model.dart');
 
 
 void main()
