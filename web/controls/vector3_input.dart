@@ -31,15 +31,25 @@ class Vector3Input extends Control
   void _initVector3InputProperties()
   {
     xProperty = new FrameworkProperty(this, 'x',
+        propertyChangedCallback: (v) => _onValueChanged(),
         defaultValue:'0');
     yProperty = new FrameworkProperty(this, 'y',
+        propertyChangedCallback: (v) => _onValueChanged(),
         defaultValue:'0');
     zProperty = new FrameworkProperty(this, 'z',
+        propertyChangedCallback: (v) => _onValueChanged(),
         defaultValue:'0');
+  }
 
-    xProperty.propertyChanging + _valueChanged;
-    yProperty.propertyChanging + _valueChanged;
-    zProperty.propertyChanging + _valueChanged;
+  void onFirstLoad(){
+    // Get references to our textboxes and then set the bindings.
+    final tbX = Template.findByName('__vector3x__', template) as TextBox;
+    final tbY = Template.findByName('__vector3y__', template) as TextBox;
+    final tbZ = Template.findByName('__vector3z__', template) as TextBox;
+
+    bind(tbX.textProperty, xProperty, bindingMode:BindingMode.TwoWay);
+    bind(tbY.textProperty, yProperty, bindingMode:BindingMode.TwoWay);
+    bind(tbZ.textProperty, zProperty, bindingMode:BindingMode.TwoWay);
   }
 
   num get x => _validNum(getValue(xProperty));
@@ -63,9 +73,8 @@ class Vector3Input extends Control
     }
   }
 
-  void _valueChanged(sender, args){
-    changed.invokeAsync(this, new VectorChangedEventArgs(x,y,z));
-  }
+  void _onValueChanged() =>
+      changed.invokeAsync(this, new VectorChangedEventArgs(x,y,z));
 
   String get defaultControlTemplate {
     return
@@ -75,11 +84,11 @@ class Vector3Input extends Control
     <stack>
       <stack orientation='horizontal'>
          <textblock text='X:' />
-         <textbox width='50' text='{template x, mode=TwoWay}' />
+         <textbox name='__vector3x__' width='50' />
          <textblock text='Y:' />
-         <textbox width='50' text='{template y, mode=TwoWay}' />
+         <textbox name='__vector3y__' width='50' />
          <textblock text='Z:' />
-         <textbox width='50' text='{template z, mode=TwoWay}' />
+         <textbox name='__vector3z__' width='50' />
       </stack>
     </stack>
   </template>
