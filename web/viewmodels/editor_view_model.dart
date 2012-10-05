@@ -159,18 +159,20 @@ class EditorViewModel extends ViewModelBase
       .propertyVM
       .setDataContext()
       .then((_){
-        evm
-        .propertyVM
-        .propertyViews
-        .forEach((String name, View view){
-          view.ready.then((t){
-            final ai = new AccordionItem()
-            ..header = name
-            ..body = view.rootVisual;
+        Futures
+          .wait(evm.propertyVM.propertyViews.getValues().map((v) => v.ready))
+          .then((_){
+            evm
+            .propertyVM
+            .propertyViews
+            .forEach((String name, View view){
+              final ai = new AccordionItem()
+                                ..header = name
+                                ..body = view.rootVisual;
 
-            _componentArea.accordionItems.add(ai);
+              _componentArea.accordionItems.add(ai);
+            });
           });
-        });
       });
     }
 

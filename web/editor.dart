@@ -62,7 +62,6 @@
 #source('views/properties/plane_properties.dart');
 
 #source('viewmodels/editor_view_model.dart');
-#source('viewmodels/generated_mesh_view_model.dart');
 #source('viewmodels/entity_view_model.dart');
 #source('viewmodels/properties/transform_properties_view_model.dart');
 #source('viewmodels/properties/sphere_properties_view_model.dart');
