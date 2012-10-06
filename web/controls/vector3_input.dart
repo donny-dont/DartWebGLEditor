@@ -1,10 +1,9 @@
 class Vector3ChangedEventArgs extends EventArgs
 {
-  final num x;
-  final num y;
-  final num z;
+  final vec3 value;
 
-  Vector3ChangedEventArgs(this.x, this.y, this.z);
+  Vector3ChangedEventArgs(num x, num y, num z)
+    : value = new vec3(x, y, z);
 }
 
 class Vector3Input extends Control
