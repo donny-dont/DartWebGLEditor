@@ -53,6 +53,7 @@
 #source('models/plane_visual_model.dart');
 #source('models/generated_mesh_model.dart');
 #source('models/empty_visual_model.dart');
+#source('models/transform_model.dart');
 
 #source('views/assets_view.dart');
 #source('views/editor_view.dart');
