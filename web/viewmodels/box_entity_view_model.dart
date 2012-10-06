@@ -3,7 +3,7 @@ class BoxEntityViewModel extends EntityViewModel
 {
   BoxEntityViewModel() :
     super(new BoxVisualModel(), new BoxPropertiesViewModel()){
-      entityName = 'Box';
+      propertyVM.entityName = 'Box';
   }
 
   Future<String> get fileTemplate =>

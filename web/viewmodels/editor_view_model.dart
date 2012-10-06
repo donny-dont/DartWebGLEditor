@@ -131,16 +131,16 @@ class EditorViewModel extends ViewModelBase
     assert(_currentNode != null);
 
 
-    Futures
-      .wait([entityVM.fileTemplate, entityVM.folderTemplate])
-      .chain((result){
-        return Futures.wait(result.map((r) => Template.deserialize(r)));
-      })
+    entityVM
+      .propertyVM
+      .setDataContext()
+      .chain((_) => Futures.wait(entityVM.propertyVM.propertyViews.getValues().map((v) => v.ready)))
+      .chain((_) => Futures.wait([entityVM.fileTemplate, entityVM.folderTemplate]))
+      .chain((result) => Futures.wait(result.map((r) => Template.deserialize(r))))
       .then((results){
         // Using the tag property to hold a reference to the entity view model
         // object.
         final node = new TreeNode()
-          ..header = entityVM.entityName
           ..tag = entityVM
           ..fileIcon = results[0]
           ..folderIcon = results[1];
@@ -149,13 +149,15 @@ class EditorViewModel extends ViewModelBase
           // setup the relationships
           entityVM.parent = _currentNode.tag;
           _currentNode.tag.children.add(entityVM);
+
+
         }
 
         _currentNode.childNodes.add(node);
         _currentNode.childVisibility = Visibility.visible;
         _currentNode = node;
 
-        _updateUITo(_currentNode);
+        _updateUITo(_currentNode, entityVM.propertyVM.entityName);
       });
 
 
@@ -165,7 +167,7 @@ class EditorViewModel extends ViewModelBase
   // UI layout handling
   //---------------------------------------------------------------------
 
-  void _updateUITo(TreeNode node){
+  void _updateUITo(TreeNode node, [String entityName]){
     _componentArea.accordionItems.clear();
 
     if (node == null || node == _scene || node.tag == null){
@@ -175,25 +177,22 @@ class EditorViewModel extends ViewModelBase
 
     final evm = node.tag as EntityViewModel;
 
-    evm
-      .propertyVM
-      .setDataContext()
-      .then((_){
-        Futures
-          .wait(evm.propertyVM.propertyViews.getValues().map((v) => v.ready))
-          .then((_){
-            evm
-            .propertyVM
-            .propertyViews
-            .forEach((String name, View view){
-              final ai = new AccordionItem()
-                                ..header = name
-                                ..body = view.rootVisual;
+        evm
+        .propertyVM
+        .propertyViews
+        .forEach((String name, View view){
+          final ai = new AccordionItem()
+                            ..header = name
+                            ..body = view.rootVisual;
 
-              _componentArea.accordionItems.add(ai);
-            });
-          });
-      });
+          _componentArea.accordionItems.add(ai);
+        });
+
+        if (entityName != null){
+          // bind the entity name to the treenode header and initialize it.
+          bind(evm.propertyVM.entityNameProperty, node.headerProperty);
+          evm.propertyVM.entityName = entityName;
+        }
     }
 
 

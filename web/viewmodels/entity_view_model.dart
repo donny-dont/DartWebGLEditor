@@ -10,9 +10,6 @@ abstract class EntityViewModel extends ViewModelBase
   /** The property view model to be used by this entity */
   final EntityPropertiesViewModel propertyVM;
 
-  /** FrameworkProperty that represents the entity friendly name */
-  FrameworkProperty entityNameProperty;
-
   /** Reference to the parent of this EntityViewModel.  Null if no parent. */
   EntityViewModel parent;
 
@@ -43,16 +40,5 @@ abstract class EntityViewModel extends ViewModelBase
     // etc... all of them will be working on the same object since they are
     // scaffolded together.
     propertyVM.model = model;
-
-    _initializeEnityViewModelProperties();
   }
-
-  _initializeEnityViewModelProperties(){
-    entityNameProperty = new FrameworkProperty(this, 'entityName',
-        defaultValue: '');
-  }
-
-  String get entityName => getValue(entityNameProperty);
-  set entityName(String value) => setValue(entityNameProperty, value);
-
 }
