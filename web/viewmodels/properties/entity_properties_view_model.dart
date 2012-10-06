@@ -2,12 +2,23 @@
 class EntityPropertiesViewModel extends PropertiesViewModelBase
 {
 
+  FrameworkProperty entityNameProperty;
+
   EntityPropertiesViewModel(){
     propertyViews['Entity Properties'] = new EntityProperties();
 
     registerEventHandler('texture_coords_changed', _textureCoordsHandler);
     registerEventHandler('normal_changed', _normalChangedHandler);
     registerEventHandler('tangent_changed', _tangentChangedHandler);
+
+    _initEntityPropertiesViewModelProperties();
+  }
+
+  String get entityName => getValue(entityNameProperty);
+  set entityName(String value) => setValue(entityNameProperty, value);
+
+  _initEntityPropertiesViewModelProperties(){
+    entityNameProperty = new FrameworkProperty(this, 'entityName');
   }
 
   void _textureCoordsHandler(CheckBox checkBox, _)
