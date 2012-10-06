@@ -1,10 +1,10 @@
-class VectorChangedEventArgs extends EventArgs
+class Vector3ChangedEventArgs extends EventArgs
 {
   final num x;
   final num y;
   final num z;
 
-  VectorChangedEventArgs(this.x, this.y, this.z);
+  Vector3ChangedEventArgs(this.x, this.y, this.z);
 }
 
 class Vector3Input extends Control
@@ -13,8 +13,8 @@ class Vector3Input extends Control
   FrameworkProperty yProperty;
   FrameworkProperty zProperty;
 
-  final FrameworkEvent<VectorChangedEventArgs> changed =
-      new FrameworkEvent<VectorChangedEventArgs>();
+  final FrameworkEvent<Vector3ChangedEventArgs> changed =
+      new FrameworkEvent<Vector3ChangedEventArgs>();
 
   Vector3Input()
   {
@@ -52,37 +52,17 @@ class Vector3Input extends Control
     bind(tbZ.textProperty, zProperty, bindingMode:BindingMode.TwoWay);
   }
 
-  num get x => validNum(getValue(xProperty));
+  num get x => _validNum(getValue(xProperty));
   set x(num value) => setValue(xProperty, '$value');
 
-  num get y => validNum(getValue(yProperty));
+  num get y => _validNum(getValue(yProperty));
   set y(num value) => setValue(yProperty, '$value');
 
-  num get z => validNum(getValue(zProperty));
+  num get z => _validNum(getValue(zProperty));
   set z(num value) => setValue(zProperty, '$value');
 
-  /**
-   * From a String [value], returns a valid num.  If the string is not
-   * valid, then the return is 0.
-   */
-  static num validNum(String value){
-    if (value == null) return 0;
-    if (value.isEmpty()) return 0;
-
-    num numValue;
-
-    try{
-      numValue = parseDouble(value);
-    }
-    on FormatException catch(e){
-      numValue = 0;
-    }
-
-    return numValue;
-  }
-
   void _onValueChanged() =>
-      changed.invokeAsync(this, new VectorChangedEventArgs(x,y,z));
+      changed.invokeAsync(this, new Vector3ChangedEventArgs(x,y,z));
 
   String get defaultControlTemplate {
     return

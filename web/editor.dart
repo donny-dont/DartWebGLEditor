@@ -45,6 +45,7 @@
 // UI sources
 //---------------------------------------------------------------------
 
+#source('controls/num_validator.dart');
 #source('controls/vector3_input.dart');
 
 #source('models/box_visual_model.dart');

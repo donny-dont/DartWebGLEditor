@@ -16,7 +16,7 @@ class SpherePropertiesViewModel extends TransformPropertiesViewModel
   }
 
   void valueChanged(String value){
-    num toNum = Vector3Input.validNum(value);
+    num toNum = _validNum(value);
 
     print('Radius changed to: ${toNum}');
   }
