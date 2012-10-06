@@ -43,13 +43,15 @@ class EditorViewModel extends ViewModelBase
     assert(_entityArea != null);
     assert(_componentArea != null);
 
-    _entityArea.children.clear();
     _componentArea.accordionItems.clear();
 
     // start with an "Scene" object as our top level, so that
     // there is a way to add new object to the top level.
 
-    _entityArea.children.add(_scene);
+    _scene.childNodes.clear();
+    if (_scene.parent == null){
+      _entityArea.children.add(_scene);
+    }
     _currentNode = _scene;
   }
 
