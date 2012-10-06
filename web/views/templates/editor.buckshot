@@ -14,11 +14,10 @@
             <textblock halign='center' text='Save' />
           </stack>
         </button>
-        <!-- 
-        (JOHN)
-        Keeping these buttons in in the first tab until event wire-up bug
-        fixed.
-        -->
+      </stack>    
+    </tabitem>
+    <tabitem header='Models' closeenabled='false'>
+       <stack orientation='horizontal'>
         <button on.click='add_box_clicked'>
           <stack>
             <image sourceuri='web/resources/new.png' />
@@ -37,26 +36,22 @@
             <textblock halign='center' text='Plane' />
           </stack>
         </button>
+      </stack>    
+    </tabitem>
+    <tabitem header='View' closeenabled='false'>
+       <stack orientation='horizontal'>
         <button>
           <stack>
             <image sourceuri='web/resources/new.png' />
             <textblock halign='center' text='Fullscreen' />
           </stack>
         </button>
-        <button on.click='zoidberg'>
+      </stack>    
+    </tabitem>
+    <tabitem header='Zoidberg'>
+       <button on.click='zoidberg'>
             <image width='105' sourceuri='web/resources/for_don.jpg' />
-        </button>
-      </stack>    
-    </tabitem>
-    <tabitem header='Models' closeenabled='false'>
-       <stack orientation='horizontal'>
-
-      </stack>    
-    </tabitem>
-    <tabitem header='View' closeenabled='false'>
-       <stack orientation='horizontal'>
-
-      </stack>    
+       </button>
     </tabitem>
   </tabcontrol>
   <accordion dockpanel.dock='right' width='250' on.loaded='component_area_loaded'>
