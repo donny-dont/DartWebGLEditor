@@ -3,7 +3,7 @@ class PlaneEntityViewModel extends EntityViewModel
 {
   PlaneEntityViewModel() :
     super(new PlaneVisualModel(), new PlanePropertiesViewModel()){
-      entityName = 'Plane';
+      propertyVM.entityName = 'Plane';
   }
 
   Future<String> get fileTemplate =>

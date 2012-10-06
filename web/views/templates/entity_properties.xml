@@ -1,4 +1,8 @@
 <stack>
+    <stack orientation='horizontal'>
+       <textblock text='Name:' />
+       <textbox text='{data entityName, mode=TwoWay}' placeholder='[entity name]' />
+    </stack>
 	<textblock text='Generate vertex attributes' />
 	<stack orientation='horizontal'>
 	  <textblock text='Texture Coordinates' />

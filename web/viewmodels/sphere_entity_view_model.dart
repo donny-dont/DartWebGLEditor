@@ -3,7 +3,7 @@ class SphereEntityViewModel extends EntityViewModel
 {
   SphereEntityViewModel() :
     super(new SphereVisualModel(), new SpherePropertiesViewModel()){
-      entityName = 'Sphere';
+      propertyVM.entityName = 'Sphere';
   }
 
   Future<String> get fileTemplate =>
