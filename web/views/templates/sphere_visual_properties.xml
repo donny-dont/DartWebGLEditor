@@ -1,0 +1,21 @@
+<stack>
+  <textblock text='Radius' />
+  <textbox text='{data radius, mode=TwoWay}' />
+  <grid height='55'>
+    <columndefinitions>
+      <columndefinition />
+      <columndefinition />
+    </columndefinitions>
+    <rowdefinitions>
+      <rowdefinition />
+      <rowdefinition />
+      <rowdefinition />
+    </rowdefinitions>
+    <textblock grid.column='0' grid.row='0' text='Tex Coords' />
+    <checkbox grid.column='1' grid.row='0' on.selectionchanged='texture_coords_changed' />
+    <textblock grid.column='0' grid.row='1' text='Normal' />
+    <checkbox grid.column='1' grid.row='1' on.selectionchanged='normal_changed' />
+    <textblock grid.column='0' grid.row='2' text='Tangent' />
+    <checkbox grid.column='1' grid.row='2' on.selectionchanged='tangent_changed' />
+  </grid>
+</stack>

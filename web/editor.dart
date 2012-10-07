@@ -52,30 +52,25 @@
 #source('models/sphere_visual_model.dart');
 #source('models/plane_visual_model.dart');
 #source('models/generated_mesh_model.dart');
-#source('models/empty_visual_model.dart');
 #source('models/transform_model.dart');
 
 #source('views/assets_view.dart');
 #source('views/editor_view.dart');
+#source('views/properties_view.dart');
+#source('views/properties/box_visual_properties.dart');
 #source('views/properties/entity_properties.dart');
+#source('views/properties/plane_visual_properties.dart');
+#source('views/properties/sphere_visual_properties.dart');
 #source('views/properties/transform_properties.dart');
-#source('views/properties/box_properties.dart');
-#source('views/properties/sphere_properties.dart');
-#source('views/properties/plane_properties.dart');
 
 #source('viewmodels/editor_view_model.dart');
 #source('viewmodels/entity_view_model.dart');
-#source('viewmodels/properties/transform_properties_view_model.dart');
-#source('viewmodels/properties/sphere_properties_view_model.dart');
-#source('viewmodels/properties/box_properties_view_model.dart');
-#source('viewmodels/properties/plane_properties_view_model.dart');
+#source('viewmodels/properties/box_visual_properties_view_model.dart');
 #source('viewmodels/properties/entity_properties_view_model.dart');
-#source('viewmodels/properties/properties_view_model_base.dart');
-#source('viewmodels/properties/empty_properties_view_model.dart');
-#source('viewmodels/box_entity_view_model.dart');
-#source('viewmodels/sphere_entity_view_model.dart');
-#source('viewmodels/plane_entity_view_model.dart');
-
+#source('viewmodels/properties/generated_mesh_properties_view_model.dart');
+#source('viewmodels/properties/plane_visual_properties_view_model.dart');
+#source('viewmodels/properties/sphere_visual_properties_view_model.dart');
+#source('viewmodels/properties/transform_properties_view_model.dart');
 
 void main()
 {

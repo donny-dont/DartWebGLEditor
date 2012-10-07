@@ -1,24 +1,13 @@
 
-class EntityPropertiesViewModel extends ViewModelBase
+class GeneratedMeshPropertiesViewModel extends ViewModelBase
 {
+  GeneratedMeshModel _model;
 
-  FrameworkProperty entityNameProperty;
-
-  EntityPropertiesViewModel(){
-    //propertyViews['Entity Properties'] = new EntityProperties();
-
+  GeneratedMeshPropertiesViewModel(GeneratedMeshModel this._model)
+  {
     registerEventHandler('texture_coords_changed', _textureCoordsHandler);
     registerEventHandler('normal_changed', _normalChangedHandler);
     registerEventHandler('tangent_changed', _tangentChangedHandler);
-
-    _initEntityPropertiesViewModelProperties();
-  }
-
-  String get entityName => getValue(entityNameProperty);
-  set entityName(String value) => setValue(entityNameProperty, value);
-
-  _initEntityPropertiesViewModelProperties(){
-    entityNameProperty = new FrameworkProperty(this, 'entityName');
   }
 
   void _textureCoordsHandler(CheckBox checkBox, _)
@@ -28,7 +17,7 @@ class EntityPropertiesViewModel extends ViewModelBase
     else
       print('Texcoords unchecked!');
 
-    model.texCoords = checkBox.isChecked;
+    _model.texCoords = checkBox.isChecked;
   }
 
   void _normalChangedHandler(CheckBox checkBox, _)
@@ -38,7 +27,7 @@ class EntityPropertiesViewModel extends ViewModelBase
     else
       print('Normal unchecked!');
 
-    model.normals = checkBox.isChecked;
+    _model.normals = checkBox.isChecked;
   }
 
   void _tangentChangedHandler(CheckBox checkBox, _)
@@ -48,6 +37,7 @@ class EntityPropertiesViewModel extends ViewModelBase
     else
       print('Tangent unchecked!');
 
-    model.tangents = checkBox.isChecked;
+    _model.tangents = checkBox.isChecked;
   }
+
 }

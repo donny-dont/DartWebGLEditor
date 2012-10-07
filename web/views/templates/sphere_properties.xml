@@ -1,4 +1,0 @@
-<stack>
-	<textblock text='Radius' />
-	<textbox text='{data radius, mode=TwoWay}' />
-</stack>

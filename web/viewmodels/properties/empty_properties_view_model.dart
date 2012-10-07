@@ -1,5 +1,0 @@
-
-class EmptyPropertiesViewModel extends PropertiesViewModelBase
-{
-
-}

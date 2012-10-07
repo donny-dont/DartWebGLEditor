@@ -80,7 +80,7 @@ class EditorViewModel extends ViewModelBase
 
     _currentNode = args.node;
 
-    _updateUITo(_currentNode);
+    //_updateUITo(_currentNode);
   }
 
   //---------------------------------------------------------------------
@@ -113,19 +113,55 @@ class EditorViewModel extends ViewModelBase
 
   void _addBoxHandler(_, __)
   {
-    addEntity(new BoxEntityViewModel());
+    EntityViewModel entity = new EntityViewModel();
+    entity.components.add(new BoxVisualProperties());
+
+    _addEntity(entity);
   }
 
   void _addSphereHandler(_, __)
   {
-    addEntity(new SphereEntityViewModel());
+    EntityViewModel entity = new EntityViewModel();
+    entity.components.add(new SphereVisualProperties());
+
+    _addEntity(entity);
   }
 
-  void _addPlaneHandler(_, __){
-    addEntity(new PlaneEntityViewModel());
+  void _addPlaneHandler(_, __)
+  {
+    EntityViewModel entity = new EntityViewModel();
+    entity.components.add(new PlaneVisualProperties());
+
+    _addEntity(entity);
+  }
+
+  void _addEntity(EntityViewModel entity)
+  {
+    _updateEntityUI(entity);
+  }
+
+  void _updateEntityUI(EntityViewModel entity)
+  {
+    _componentArea.accordionItems.clear();
+
+    Futures.wait(entity.components.map((v) => v.ready))
+      .then((_) {
+        for (View view in entity.components)
+          _addComponentPropertyView(view);
+      });
+  }
+
+  void _addComponentPropertyView(PropertiesView view)
+  {
+    final item = new AccordionItem();
+    item.header = view.name;
+    item.body = view.rootVisual;
+
+    _componentArea.accordionItems.add(item);
   }
 
   /** Adds an [entityVM] to the application and updates the UI. */
+/*
   void addEntity(EntityViewModel entityVM){
     // something should always be selected (_scene is default)
     assert(_currentNode != null);
@@ -159,9 +195,8 @@ class EditorViewModel extends ViewModelBase
 
         _updateUITo(_currentNode, entityVM.propertyVM.entityName);
       });
-
-
   }
+
 
   //---------------------------------------------------------------------
   // UI layout handling
@@ -194,7 +229,7 @@ class EditorViewModel extends ViewModelBase
           evm.propertyVM.entityName = entityName;
         }
     }
-
+*/
 
   //---------------------------------------------------------------------
   // Canvas handling
