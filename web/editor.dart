@@ -2,8 +2,7 @@
 #import('dart:json');
 #import('dart:math');
 #import('package:dartnet_event_model/events.dart');
-#import('package:dart_utils/web.dart');
-#import('package:dart_utils/shared.dart');
+#import('package:buckshot/web/web.dart');
 #import('package:buckshot/buckshot.dart');
 #import('package:buckshot/extensions/controls/accordion/accordion.dart');
 #import('package:buckshot/extensions/controls/modal_dialog.dart');
