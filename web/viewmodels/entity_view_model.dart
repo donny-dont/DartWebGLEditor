@@ -4,7 +4,7 @@ class EntityViewModel extends ViewModelBase
   /**
    * Entity properties associated with the Entity.
    */
-
+  EntityProperties _entity;
   /**
    * Transform associated with the Entity.
    */
@@ -17,11 +17,14 @@ class EntityViewModel extends ViewModelBase
   List<PropertiesView> components;
 
   EntityViewModel()
-    : _transform = new TransformProperties()
+    : _entity = new EntityProperties()
+    , _transform = new TransformProperties()
     , components = new List<PropertiesView>()
   {
+    components.add(_entity);
     components.add(_transform);
   }
 
+  EntityProperties get entityProperties => _entity;
   TransformProperties get transform => _transform;
 }

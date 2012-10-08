@@ -6,11 +6,6 @@ class EditorViewModel extends ViewModelBase
   WebGLRenderingContext _context;
   final EditorView _view;
 
-  TreeNode _currentNode;
-
-  // special top-level node
-  final _scene = new TreeNode()..header = 'Scene';
-
   EditorViewModel(this._view)
   {
     // Entity tree-view
@@ -35,24 +30,16 @@ class EditorViewModel extends ViewModelBase
 
     // Zoidberg
     registerEventHandler('zoidberg', zoidberg);
-
   }
 
   /** Initialized the editor to a starting state */
-  void initEditor(){
+  void _initEditor()
+  {
     assert(_entityArea != null);
     assert(_componentArea != null);
 
     _componentArea.accordionItems.clear();
-
-    // start with an "Scene" object as our top level, so that
-    // there is a way to add new object to the top level.
-
-    _scene.childNodes.clear();
-    if (_scene.parent == null){
-      _entityArea.children.add(_scene);
-    }
-    _currentNode = _scene;
+    _entityArea.children.clear();
   }
 
   //---------------------------------------------------------------------
@@ -67,20 +54,12 @@ class EditorViewModel extends ViewModelBase
     // TODO (JOHN) need a better way to know when the entire view is loaded
     // instead of knowing the last piece of content that is loaded, which
     // can prove to be unreliable if the template is changed.
-    initEditor();
+    _initEditor();
   }
 
   void _entitySelectedHandler(_, TreeNodeSelectedEventArgs args)
   {
-    if (args.node == _scene){
-      _currentNode = _scene;
-      _componentArea.accordionItems.clear();
-      return;
-    }
-
-    _currentNode = args.node;
-
-    //_updateUITo(_currentNode);
+    _updateEntityUI(args.node.tag);
   }
 
   //---------------------------------------------------------------------
@@ -99,7 +78,7 @@ class EditorViewModel extends ViewModelBase
 
   void _newFileHandler(_, __)
   {
-    initEditor();
+    _initEditor();
   }
 
   void _saveFileHandler(_, __)
@@ -116,7 +95,7 @@ class EditorViewModel extends ViewModelBase
     EntityViewModel entity = new EntityViewModel();
     entity.components.add(new BoxVisualProperties());
 
-    _addEntity(entity);
+    _addEntity(entity, 'Box', 'web/views/templates/box_icon.xml');
   }
 
   void _addSphereHandler(_, __)
@@ -124,7 +103,7 @@ class EditorViewModel extends ViewModelBase
     EntityViewModel entity = new EntityViewModel();
     entity.components.add(new SphereVisualProperties());
 
-    _addEntity(entity);
+    _addEntity(entity, 'Sphere', 'web/views/templates/sphere_icon.xml');
   }
 
   void _addPlaneHandler(_, __)
@@ -132,12 +111,27 @@ class EditorViewModel extends ViewModelBase
     EntityViewModel entity = new EntityViewModel();
     entity.components.add(new PlaneVisualProperties());
 
-    _addEntity(entity);
+    _addEntity(entity, 'Plane', 'web/views/templates/plane_icon.xml');
   }
 
-  void _addEntity(EntityViewModel entity)
+  void _addEntity(EntityViewModel entity, String treeNodeHeader, String treeNodeIcon)
   {
-    _updateEntityUI(entity);
+    Template.deserialize(treeNodeIcon)
+      .then((t) {
+        TreeNode node = new TreeNode();
+
+        node.tag = entity;
+        node.fileIcon = t;
+        node.folderIcon = t;
+        node.header = treeNodeHeader;
+
+        _entityArea.children.add(node);
+
+        if (_entityArea.selectedNode == null)
+        {
+          _entityArea.selectNode(node);
+        }
+      });
   }
 
   void _updateEntityUI(EntityViewModel entity)
@@ -148,14 +142,25 @@ class EditorViewModel extends ViewModelBase
       .then((_) {
         for (View view in entity.components)
           _addComponentPropertyView(view);
+
+          EntityPropertiesViewModel entityViewModel = entity.entityProperties.rootVisual.dataContext;
+          TreeNode selected = _entityArea.selectedNode;
+          print('Hi ${selected.header}');
+          entityViewModel.entityName = selected.header;
+          bind(entityViewModel.entityNameProperty, selected.headerProperty);
       });
   }
 
   void _addComponentPropertyView(PropertiesView view)
   {
     final item = new AccordionItem();
-    item.header = view.name;
     item.body = view.rootVisual;
+
+    view.headerTemplate
+      .chain((value) => Template.deserialize(value))
+      .then((template) {
+        item.header = template;
+      });
 
     _componentArea.accordionItems.add(item);
   }

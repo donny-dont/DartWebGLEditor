@@ -10,4 +10,7 @@ class PlaneVisualProperties extends PropertiesView
   }
 
   String get name => 'Plane Visual';
+
+  Future<String> get headerTemplate =>
+    Template.getTemplate('web/views/templates/plane_visual_header.xml');
 }

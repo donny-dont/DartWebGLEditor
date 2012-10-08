@@ -10,4 +10,7 @@ class TransformProperties extends PropertiesView
   }
 
   String get name => 'Transform';
+
+  Future<String> get headerTemplate =>
+    Template.getTemplate('web/views/templates/transform_header.xml');
 }

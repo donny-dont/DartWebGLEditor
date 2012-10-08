@@ -82,9 +82,7 @@ void main()
     buckshot.registerElement(new Vector3Input.register());
   }
 
-  //final AssetsView view = new AssetsView();
   final EditorView view = new EditorView();
-  //final BoxVisualView view = new BoxVisualView(new BoxVisualModel());
 
   setView(view)
   .then((viewObject){

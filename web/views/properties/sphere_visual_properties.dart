@@ -10,4 +10,7 @@ class SphereVisualProperties extends PropertiesView
   }
 
   String get name => 'Sphere Visual';
+
+  Future<String> get headerTemplate =>
+    Template.getTemplate('web/views/templates/sphere_visual_header.xml');
 }

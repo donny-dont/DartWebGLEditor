@@ -9,4 +9,7 @@ class BoxVisualProperties extends PropertiesView
   }
 
   String get name => 'Box Visual';
+
+  Future<String> get headerTemplate =>
+    Template.getTemplate('web/views/templates/box_visual_header.xml');
 }

@@ -8,4 +8,6 @@ abstract class PropertiesView extends View
     : super.fromResource(resource);
 
   abstract String get name;
+
+  abstract Future<String> get headerTemplate;
 }

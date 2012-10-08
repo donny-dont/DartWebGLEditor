@@ -1,0 +1,4 @@
+<stack orientation='horizontal'>
+  <image height='20' width='20' alt='wireframe cube' sourceuri='web/resources/cube.png' />
+  <textblock text='Box' />
+</stack>
