@@ -1,6 +1,11 @@
-<dockpanel halign='stretch' valign='stretch' margin='2'>
-  <tabcontrol dockpanel.dock='top' height='135' margin='10,0,0,0'>
-    <tabitem header='File' closeenabled='false'>
+<dockpanel background='{resource header_background_gradient}' halign='stretch' valign='stretch'>
+  <tabcontrol background='{resource theme_background_light}' dockpanel.dock='top' height='135'>
+    <tabitem closeenabled='false'>
+      <header>
+           <border style='{resource tab_container_style}'>
+              <textblock style='{resource tab_font_style}' text='File' />
+           </border>
+      </header>
       <stack orientation='horizontal'>
         <button on.click='new_file_clicked'>
           <stack>
@@ -16,7 +21,12 @@
         </button>
       </stack>    
     </tabitem>
-    <tabitem header='Models' closeenabled='false'>
+    <tabitem closeenabled='false'>
+      <header>
+           <border style='{resource tab_container_style}'>
+              <textblock style='{resource tab_font_style}' text='Models' />
+           </border>
+      </header>
        <stack orientation='horizontal'>
         <button on.click='add_box_clicked'>
           <stack>
@@ -38,7 +48,12 @@
         </button>
       </stack>    
     </tabitem>
-    <tabitem header='View' closeenabled='false'>
+    <tabitem closeenabled='false'>
+      <header>
+           <border style='{resource tab_container_style}'>
+              <textblock style='{resource tab_font_style}' text='View' />
+           </border>
+      </header>
        <stack orientation='horizontal'>
         <button>
           <stack>
@@ -48,32 +63,30 @@
         </button>
       </stack>    
     </tabitem>
-    <tabitem header='Zoidberg'>
+    <tabitem>
+      <header>
+           <border style='{resource tab_container_style}'>
+              <textblock style='{resource tab_font_style}' text='Zoidberg' />
+           </border>
+      </header>
        <button on.click='zoidberg'>
             <image width='105' sourceuri='web/resources/for_don.jpg' />
        </button>
     </tabitem>
   </tabcontrol>
-  <accordion dockpanel.dock='right' width='250' on.loaded='component_area_loaded'>
-  	<!--
-  	(JOHN)
-    <accordionitem header='Transform'>
-      <stack>
-        <textblock>Position</textblock>
-        <vector3input x='0' y='0' z='0' />
-        <textblock>Rotation</textblock>
-        <vector3input x='0' y='0' z='0' />
-        <textblock>Scale</textblock>
-        <vector3input x='0' y='0' z='0' />
-      </stack>
-    </accordionitem>
-	-->
-  </accordion>
-  <treeview dockpanel.dock='right' on.treenodeselected='entity_selected' borderthickness='1' width='250' on.loaded='entity_area_loaded'>
-<!--
-    <treenode draggable='true' childvisibility='visible' header='Box' />
--->
+  
+  <!-- Properties View -->
+  <accordion background='#1c1c1c' 
+             dockpanel.dock='right' 
+             width='250' 
+             on.loaded='component_area_loaded' />
 
-  </treeview>
-  <webglcanvas dockpanel.dock='left' on.frame='frame' on.loaded='canvas_loaded' />
+  <!-- Assets View -->
+  <treeview dockpanel.dock='right' 
+            on.treenodeselected='entity_selected'
+            on.loaded='entity_area_loaded'
+            width='250' />
+  <border dockpanel.dock='left' borderthickness='0,1,0,0'bordercolor='{resource theme_border_color}'>
+     <webglcanvas valign='stretch' halign='stretch' on.frame='frame' on.loaded='canvas_loaded' />
+  </border>
 </dockpanel>
