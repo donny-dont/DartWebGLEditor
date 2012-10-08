@@ -82,11 +82,14 @@ void main()
     buckshot.registerElement(new Vector3Input.register());
   }
 
-  final EditorView view = new EditorView();
+  Template
+    .deserialize('web/views/templates/resources.buckshot')
+    .chain((_) => setView(new EditorView()))
+    .then((viewObject){
+      final rootParent = viewObject.parent as Border;
 
-  setView(view)
-  .then((viewObject){
-    bind(buckshot.windowHeightProperty,
-        (viewObject.parent as Border).heightProperty);
-  });
+      rootParent.background = new SolidColorBrush(new Color.hex(FrameworkResource.retrieveResource('theme_background_dark')));
+
+      bind(buckshot.windowHeightProperty, rootParent.heightProperty);
+    });
 }
