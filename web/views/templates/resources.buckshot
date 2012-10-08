@@ -1,4 +1,71 @@
 <!-- This template will hold resources common to the entire application -->
 <resourcecollection>
 
+  <!--
+  ****
+  Default Theme Overrides
+  ****
+  -->
+
+  <!-- Default Palette -->
+  <color key='theme_background_light' value='Black' />
+  <color key='theme_background_dark' value='#1b1b1b' />
+  <color key='theme_background_mouse_hover' value='Black' />
+  <color key='theme_background_mouse_down' value='DarkGray' />
+
+  <!-- Shadows --> 
+  <color key='theme_shadow_color' value='Black' />
+  <var key='theme_shadow_x' value='0' />
+  <var key='theme_shadow_y' value='0' />
+  <var key='theme_shadow_blur' value='0' />
+
+  <!-- Borders -->
+  <color key='theme_border_color' value='#8c8f95' />
+  <color key='theme_border_color_dark' value='#8c8f95' />
+  <var key='theme_border_thickness' value='1' />
+  <var key='theme_border_padding' value='5' />
+
+  <!-- Text -->
+  <var key='theme_text_font_family' value='Lato' />
+  <color key='theme_text_foreground' value='#777777' />
+  
+  <!-- TextBox -->
+  <!-- TextBox -->
+  <color key='theme_textbox_background' value='Black' />
+  <color key='theme_textbox_border_color' value='#8c8f95' />
+  <var key='theme_textbox_border_thickness' value='1' />
+  <var key='theme_textbox_corner_radius' value='0' />
+  <var key='theme_textbox_border_style' value='solid' />
+  <var key='theme_textbox_padding' value='3' />
+  
+  <!--
+  ****
+  End Default Theme Overrides
+  ****
+  -->
+  
+  <styletemplate key='tab_font_style'>
+     <setters>
+        <setter property='fontSize' value='14' />
+        <setter property='hAlign' value='center' />
+     </setters>
+  </styletemplate>
+  
+    <styletemplate key='tab_container_style'>
+     <setters>
+        <setter property='width' value='60' />
+        <setter property='margin' value='0,0,0,20' />
+        <setter property='padding' value='2' />
+     </setters>
+  </styletemplate>
+	
+  <lineargradientbrush key="header_background_gradient" direction="vertical">
+     <stops>
+     	<gradientstop color="Black" percent='1'></gradientstop>     
+	    <gradientstop color="#555555" percent='5'></gradientstop>
+	    <gradientstop color="#555555" percent='98'></gradientstop>
+	  </stops>
+  </lineargradientbrush>
+  
+  
 </resourcecollection>
