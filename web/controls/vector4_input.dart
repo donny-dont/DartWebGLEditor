@@ -1,0 +1,4 @@
+
+class Vector4Input {
+  
+}
