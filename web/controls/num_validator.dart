@@ -1,3 +1,4 @@
+part of editor;
 
 /**
  * From a String [value], returns a valid num.  If the string is not
@@ -5,7 +6,7 @@
  */
 num _validNum(String value){
   if (value == null) return 0;
-  if (value.isEmpty()) return 0;
+  if (value.isEmpty) return 0;
 
   num numValue;
 

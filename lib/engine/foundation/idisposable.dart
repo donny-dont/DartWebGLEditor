@@ -1,3 +1,5 @@
+part of editor;
+
 /**
  * Lithium-Ion Game Engine
  *
@@ -33,5 +35,5 @@ abstract class IDisposable
   /**
    * Performs tasks associated with disposing of unmanaged resources.
    */
-  abstract void dispose();
+  void dispose();
 }

@@ -1,10 +1,12 @@
+part of editor;
+
 /**
  * Lithium-Ion Game Engine
  *
  * ---------------------------------------------------------------------
  *
  * Copyright (c) 2012, Don Olmstead
- * 
+ *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
  * arising from the use of this software.
@@ -28,13 +30,15 @@
 class Game
 {
   static Game instance;
-  
+
   /// The [GameWindow] associated with the [Game].
   GameWindow _gameWindow;
   /// The [GameView] being displayed.
   GameView _gameView;
   /// The [GraphicsDevice] associated with the [Game].
-  Device _graphicsDevice;
+  GraphicsDevice _graphicsDevice;
+  /// The [GraphicsContext] associated with the [Game].
+  GraphicsContext _graphicsContext;
   /// The handle associated with the viewport
   int _viewportHandle;
   /// The clear color
@@ -44,38 +48,47 @@ class Game
     : _gameWindow = null
     , _gameView = new GameView()
     , _graphicsDevice = null
+    , _graphicsContext = null
     , _viewportHandle = 0
     , _clearColor = new vec4(1.0, 1.0, 0.0, 1.0);
-  
-  void update(int time)
+
+  void update(double time)
   {
-    _graphicsDevice.immediateContext.clear(_clearColor, 0.0, 0);
+    _graphicsContext.clearColorBuffer(
+      _clearColor.r,
+      _clearColor.g,
+      _clearColor.b,
+      _clearColor.a
+    );
+    _graphicsContext.clearDepthBuffer(0.0);
+    _graphicsContext.clearStencilBuffer(0);
+
     _gameView.update();
   }
-  
+
   void resize(int width, int height)
   {
     _graphicsDevice.deleteDeviceChild(_viewportHandle);
-    
+
     Map viewportSettings = {
       'x': 0,
       'y': 0,
       'width': width,
       'height': height
     };
-    
+
     _viewportHandle = _graphicsDevice.createViewport('MainViewport', viewportSettings);
-    
-    _graphicsDevice.immediateContext.setViewport(_viewportHandle);
-    
+
+    _graphicsDevice.context.setViewport(_viewportHandle);
+
     print('resize: ${width}x${height}');
   }
-  
+
   GameWindow get gameWindow => _gameWindow;
-  
+
   GameView get gameView => _gameView;
   set gameView(GameView value) { _gameView = value; }
-  
+
   //---------------------------------------------------------------------
   // Static methods
   //---------------------------------------------------------------------
@@ -84,40 +97,41 @@ class Game
   {
     // Load the game settings
     GameSettings settings = new GameSettings('#settings');
-    
+
     GamePad._onInitialize();
-    
+
     // Create the game instance
     instance = new Game();
-    
+
     GameWindow gameWindow = new GameWindow('#game', settings.width, settings.height);
     instance._gameWindow = gameWindow;
-    
+
     // Create and register the GraphicsDevice
-    Device graphicsDevice = new Device(gameWindow.context);
+    GraphicsDevice graphicsDevice = new GraphicsDevice(gameWindow.context);
     instance._graphicsDevice = graphicsDevice;
-    
+    instance._graphicsContext = graphicsDevice.context;
+
     ServiceLocator._registerGraphicsDevice(graphicsDevice);
-    
+
     // Call resize to create the viewport
     instance.resize(settings.width, settings.height);
   }
-  
-  static void _onUpdate(int time)
+
+  static void _onUpdate(double time)
   {
     // Enable when Dartium gets Gamepad API
     //GamePad._onUpdate();
 
     instance.update(time);
   }
-  
+
   static void _onResize(int width, int height)
   {
     instance.resize(width, height);
   }
-    
+
   static void _createViewport(width, height)
   {
-      
+
   }
 }

@@ -1,3 +1,4 @@
+part of editor;
 
 class TransformProperties extends PropertiesView
 {
@@ -5,7 +6,7 @@ class TransformProperties extends PropertiesView
     : super.fromResource('web/views/templates/transform_properties.xml')
   {
     ready.then((t) {
-      t.dataContext = new TransformPropertiesViewModel();
+      t.dataContext.value = new TransformPropertiesViewModel();
     });
   }
 

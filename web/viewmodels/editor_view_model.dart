@@ -1,3 +1,4 @@
+part of editor;
 
 class EditorViewModel extends ViewModelBase
 {
@@ -38,7 +39,7 @@ class EditorViewModel extends ViewModelBase
     assert(_entityArea != null);
     assert(_componentArea != null);
 
-    _componentArea.accordionItems.clear();
+    _componentArea.accordionItems.value.clear();
     _entityArea.children.clear();
   }
 
@@ -59,7 +60,7 @@ class EditorViewModel extends ViewModelBase
 
   void _entitySelectedHandler(_, TreeNodeSelectedEventArgs args)
   {
-    _updateEntityUI(args.node.tag);
+    _updateEntityUI(args.node.tag.value);
   }
 
   //---------------------------------------------------------------------
@@ -120,10 +121,10 @@ class EditorViewModel extends ViewModelBase
       .then((t) {
         TreeNode node = new TreeNode();
 
-        node.tag = entity;
-        node.fileIcon = t;
-        node.folderIcon = t;
-        node.header = treeNodeHeader;
+        node.tag.value = entity;
+        node.fileIcon.value = t;
+        node.folderIcon.value = t;
+        node.header.value = treeNodeHeader;
 
         _entityArea.children.add(node);
 
@@ -136,25 +137,25 @@ class EditorViewModel extends ViewModelBase
 
   void _updateEntityUI(EntityViewModel entity)
   {
-    _componentArea.accordionItems.clear();
+    _componentArea.accordionItems.value.clear();
 
     Futures.wait(entity.components.map((v) => v.ready))
       .then((_) {
         for (View view in entity.components)
           _addComponentPropertyView(view);
 
-          EntityPropertiesViewModel entityViewModel = entity.entityProperties.rootVisual.dataContext;
-          TreeNode selected = _entityArea.selectedNode;
-          print('Hi ${selected.header}');
-          entityViewModel.entityName = selected.header;
-          bind(entityViewModel.entityNameProperty, selected.headerProperty);
+          EntityPropertiesViewModel entityViewModel = entity.entityProperties.rootVisual.dataContext.value;
+          TreeNode selected = _entityArea.selectedNode.value;
+          print('Hi ${selected.header.value}');
+          entityViewModel.entityName = selected.header.value;
+          bind(entityViewModel.entityNameProperty, selected.header);
       });
   }
 
   void _addComponentPropertyView(PropertiesView view)
   {
     final item = new AccordionItem();
-    item.body = view.rootVisual;
+    item.body.value = view.rootVisual;
 
     view.headerTemplate
       .chain((value) => Template.deserialize(value))
@@ -162,7 +163,7 @@ class EditorViewModel extends ViewModelBase
         item.header = template;
       });
 
-    _componentArea.accordionItems.add(item);
+    _componentArea.accordionItems.value.add(item);
   }
 
   /** Adds an [entityVM] to the application and updates the UI. */
@@ -248,8 +249,8 @@ class EditorViewModel extends ViewModelBase
     canvas
       .updateMeasurementAsync
       .then((ElementRect r){
-        canvas.surfaceHeight = r.bounding.height;
-        canvas.surfaceWidth = r.bounding.width;
+        canvas.surfaceHeight.value = r.bounding.height;
+        canvas.surfaceWidth.value = r.bounding.width;
       });
   }
 

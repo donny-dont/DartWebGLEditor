@@ -78,7 +78,7 @@
   <!-- Properties View -->
   <accordion background='#1c1c1c' 
              dockpanel.dock='right' 
-             width='250' 
+             width='250'
              on.loaded='component_area_loaded' />
 
   <!-- Assets View -->

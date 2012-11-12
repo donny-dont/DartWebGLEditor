@@ -1,3 +1,5 @@
+part of editor;
+
 /**
  * \file entity.dart
  *

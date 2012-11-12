@@ -1,3 +1,4 @@
+part of editor;
 
 class SphereVisualPropertiesViewModel extends GeneratedMeshPropertiesViewModel
 {

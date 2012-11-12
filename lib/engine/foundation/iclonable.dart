@@ -1,3 +1,5 @@
+part of editor;
+
 /**
  * Lithium-Ion Game Engine
  *
@@ -36,10 +38,10 @@ abstract class IClonable
   /**
    * Creates a new object that is a copy of the current instance.
    */
-  abstract IClonable clone();
+  IClonable clone();
 
   /**
    * Copies the value of the instance into [copy].
    */
-  abstract void cloneTo(IClonable copy);
+  void cloneTo(IClonable copy);
 }

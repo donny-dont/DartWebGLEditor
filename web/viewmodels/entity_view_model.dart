@@ -1,3 +1,4 @@
+part of editor;
 
 class EntityViewModel extends ViewModelBase
 {

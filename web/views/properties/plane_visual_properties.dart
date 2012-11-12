@@ -1,3 +1,4 @@
+part of editor;
 
 class PlaneVisualProperties extends PropertiesView
 {
@@ -5,7 +6,7 @@ class PlaneVisualProperties extends PropertiesView
     : super.fromResource('web/views/templates/plane_visual_properties.xml')
   {
     ready.then((t) {
-      t.dataContext = new PlaneVisualPropertiesViewModel();
+      t.dataContext.value = new PlaneVisualPropertiesViewModel();
     });
   }
 

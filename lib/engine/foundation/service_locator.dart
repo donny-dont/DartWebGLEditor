@@ -1,3 +1,5 @@
+part of editor;
+
 /**
  * Lithium-Ion Game Engine
  *
@@ -28,14 +30,14 @@
 class ServiceLocator
 {
   /// The [GraphicsDevice] associated with the game.
-  static Device _graphicsDevice;
+  static GraphicsDevice _graphicsDevice;
 
-  static Device get graphicsDevice => _graphicsDevice;
+  static GraphicsDevice get graphicsDevice => _graphicsDevice;
 
   /**
    * Registers the GraphicsDevice.
    */
-  static void _registerGraphicsDevice(Device value)
+  static void _registerGraphicsDevice(GraphicsDevice value)
   {
     _graphicsDevice = value;
   }

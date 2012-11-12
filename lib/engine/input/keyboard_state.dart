@@ -1,3 +1,5 @@
+part of editor;
+
 /**
  * Lithium-Ion Game Engine
  *

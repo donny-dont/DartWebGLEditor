@@ -1,3 +1,5 @@
+part of editor;
+
 class Vector3ChangedEventArgs extends EventArgs
 {
   final vec3 value;
@@ -8,9 +10,10 @@ class Vector3ChangedEventArgs extends EventArgs
 
 class Vector3Input extends Control
 {
-  FrameworkProperty xProperty;
-  FrameworkProperty yProperty;
-  FrameworkProperty zProperty;
+  FrameworkProperty x;
+  FrameworkProperty y;
+  FrameworkProperty z;
+  bool _initialized;
 
   final FrameworkEvent<Vector3ChangedEventArgs> changed =
       new FrameworkEvent<Vector3ChangedEventArgs>();
@@ -19,7 +22,9 @@ class Vector3Input extends Control
   {
     Browser.appendClass(rawElement, "Vector3Input");
 
+    _initialized = false;
     _initVector3InputProperties();
+    _initialized = true;
 
     registerEvent('changed', changed);
   }
@@ -29,15 +34,18 @@ class Vector3Input extends Control
 
   void _initVector3InputProperties()
   {
-    xProperty = new FrameworkProperty(this, 'x',
-        propertyChangedCallback: (v) => _onValueChanged(),
-        defaultValue:'0');
-    yProperty = new FrameworkProperty(this, 'y',
-        propertyChangedCallback: (v) => _onValueChanged(),
-        defaultValue:'0');
-    zProperty = new FrameworkProperty(this, 'z',
-        propertyChangedCallback: (v) => _onValueChanged(),
-        defaultValue:'0');
+    x = new FrameworkProperty(this, 'x',
+        propertyChangedCallback: (_) => _onValueChanged(),
+        defaultValue:'0',
+        converter:const StringToNumericConverter());
+    y = new FrameworkProperty(this, 'y',
+        propertyChangedCallback: (_) => _onValueChanged(),
+        defaultValue:'0',
+        converter:const StringToNumericConverter());
+    z = new FrameworkProperty(this, 'z',
+        propertyChangedCallback: (_) => _onValueChanged(),
+        defaultValue:0,
+        converter:const StringToNumericConverter());
   }
 
   void onFirstLoad(){
@@ -46,22 +54,15 @@ class Vector3Input extends Control
     final tbY = Template.findByName('__vector3y__', template) as TextBox;
     final tbZ = Template.findByName('__vector3z__', template) as TextBox;
 
-    bind(tbX.textProperty, xProperty, bindingMode:BindingMode.TwoWay);
-    bind(tbY.textProperty, yProperty, bindingMode:BindingMode.TwoWay);
-    bind(tbZ.textProperty, zProperty, bindingMode:BindingMode.TwoWay);
+    bind(tbX.text, x, bindingMode:BindingMode.TwoWay);
+    bind(tbY.text, y, bindingMode:BindingMode.TwoWay);
+    bind(tbZ.text, z, bindingMode:BindingMode.TwoWay);
   }
 
-  num get x => _validNum(getValue(xProperty));
-  set x(num value) => setValue(xProperty, '$value');
-
-  num get y => _validNum(getValue(yProperty));
-  set y(num value) => setValue(yProperty, '$value');
-
-  num get z => _validNum(getValue(zProperty));
-  set z(num value) => setValue(zProperty, '$value');
-
-  void _onValueChanged() =>
-      changed.invokeAsync(this, new Vector3ChangedEventArgs(x,y,z));
+  void _onValueChanged() {
+    if (_initialized)
+      changed.invokeAsync(this, new Vector3ChangedEventArgs(x.value, y.value, z.value));
+  }
 
   String get defaultControlTemplate {
     return

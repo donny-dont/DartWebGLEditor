@@ -1,3 +1,4 @@
+part of editor;
 
 class EntityProperties extends PropertiesView
 {
@@ -5,7 +6,7 @@ class EntityProperties extends PropertiesView
     super.fromResource('web/views/templates/entity_properties.xml')
   {
     ready.then((t) {
-      t.dataContext = new EntityPropertiesViewModel();
+      t.dataContext.value = new EntityPropertiesViewModel();
     });
   }
 

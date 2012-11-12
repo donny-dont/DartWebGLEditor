@@ -1,3 +1,4 @@
+part of editor;
 
 class SphereVisualProperties extends PropertiesView
 {
@@ -5,7 +6,7 @@ class SphereVisualProperties extends PropertiesView
     : super.fromResource('web/views/templates/sphere_visual_properties.xml')
   {
     ready.then((t) {
-      t.dataContext = new SphereVisualPropertiesViewModel();
+      t.dataContext.value = new SphereVisualPropertiesViewModel();
     });
   }
 

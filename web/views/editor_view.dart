@@ -1,3 +1,4 @@
+part of editor;
 
 class EditorView extends View
 {
@@ -8,7 +9,7 @@ class EditorView extends View
     // dataContext.  This crucial step is what allows the view model to
     // bind with the template.
     ready.then((t){
-      t.dataContext = new EditorViewModel(this);
+      t.dataContext.value = new EditorViewModel(this);
     });
   }
 }

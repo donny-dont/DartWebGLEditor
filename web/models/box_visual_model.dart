@@ -1,3 +1,4 @@
+part of editor;
 
 class BoxVisualModel extends GeneratedMeshModel
 {

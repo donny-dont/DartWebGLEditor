@@ -1,3 +1,4 @@
+part of editor;
 
 abstract class GeneratedMeshModel
 {
@@ -34,5 +35,5 @@ abstract class GeneratedMeshModel
     generateMesh();
   }
 
-  abstract void generateMesh();
+  void generateMesh();
 }

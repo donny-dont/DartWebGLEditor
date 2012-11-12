@@ -1,3 +1,4 @@
+part of editor;
 
 abstract class PropertiesView extends View
 {
@@ -7,7 +8,7 @@ abstract class PropertiesView extends View
   PropertiesView.fromResource(String resource)
     : super.fromResource(resource);
 
-  abstract String get name;
+  String get name;
 
-  abstract Future<String> get headerTemplate;
+  Future<String> get headerTemplate;
 }

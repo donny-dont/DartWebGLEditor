@@ -1,3 +1,4 @@
+part of editor;
 
 class TransformPropertiesViewModel extends ViewModelBase
 {
